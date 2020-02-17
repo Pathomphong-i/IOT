@@ -30,13 +30,14 @@ mqtt_password = "Vv2syCm0pNyU"
 client = mqtt.Client()
 client.username_pw_set(username=mqtt_user,password=mqtt_password)
 client.connect(mqtt_server,mqtt_port)
+#subscribe
 client.subscribe("mqtt_status",0)
 client.on_message=on_message
 client.loop_start() 
 
 
 while True:
-      	#read switch 
+    #read switch 
 	state = GPIO.input(14)
 	if state == False:
 		sw_status = "1"
@@ -49,12 +50,14 @@ while True:
         	GPIO.output(15,GPIO.HIGH) 
 		if led_status == "OFF":
 			led_status = "ON"
+			#publish
 			client.publish("led_status", "ON")
 			print("ON")
    	elif sw_status == "0" or mqtt_status == "0":
     	    	GPIO.output(15,GPIO.LOW)
 		if led_status =="ON":
 			led_status = "OFF"
+			#publish
 			client.publish("led_status", "OFF")
 			print("OFF")
 	
