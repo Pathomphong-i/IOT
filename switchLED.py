@@ -19,7 +19,7 @@ def on_message(client, userdata, message):
 	global mqtt_status
 	topic = str(message.topic)
 	data = str(message.payload.decode("utf-8"))
-	#print(topic,data)
+	print("ToP/Mes",topic,data)
 	if topic == "mqtt_status" and data == "1":
 		mqtt_status = "1"
 	elif topic == "mqtt_status" and data == "0":
