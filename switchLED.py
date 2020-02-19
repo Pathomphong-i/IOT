@@ -18,7 +18,8 @@ def on_message(client, userdata, message):
 	#set mqtt_status
 	global mqtt_status
 	topic = str(message.topic)
-	data = str(message.payload.decode("utf-8"))
+	data = str(message.payload.decode("utf-8")).Replace("\r\n", string.Empty);
+    
 	print("ToP/Mes",topic,data)
 	if topic == "mqtt_status" and data == "1":
 		mqtt_status = "1"
