@@ -20,9 +20,9 @@ def on_message(client, userdata, message):
 	topic = str(message.topic)
 	data = str(message.payload.decode("utf-8"))
 	#print(topic,data)
-	if topic == "mqtt_status" and int(data) == 1:
+	if topic == "mqtt_status" and data == "1":
 		mqtt_status = "1"
-	elif topic == "mqtt_status" and int(data) == 0:
+	elif topic == "mqtt_status" and data == "0":
 		mqtt_status = "0"
 
 mqtt_server = "hairdresser.cloudmqtt.com"
