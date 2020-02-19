@@ -19,7 +19,7 @@ def on_message(client, userdata, message):
 	global mqtt_status
 	topic = str(message.topic)
 	data = str(message.payload.decode("utf-8"))
-        data = data.rstrip()
+	data = data.rstrip()
     
     
 	print("ToP/Mes",topic,data)
