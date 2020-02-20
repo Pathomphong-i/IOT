@@ -57,8 +57,8 @@ while True:
 	if state == False:
 		sw_status = "1"
 		
-    	elif state == True:		
-		sw_status =  "0"
+    	elif state == True:
+                sw_status =  "0"
 
         #Read Acid
         state_Acid = GPIO.input(2)
