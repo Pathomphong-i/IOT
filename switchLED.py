@@ -43,7 +43,7 @@ client.loop_start()
 
 
 while True:
-    #read switch 
+        #read switch 
 	state = GPIO.input(14)
 	if state == False:
 		sw_status = "1"
