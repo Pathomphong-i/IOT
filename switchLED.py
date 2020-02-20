@@ -11,8 +11,9 @@ GPIO.setwarnings(False)
 GPIO.setup(14,GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(2,GPIO.IN, pull_up_down=GPIO.PUD_UP) #Acide input
 GPIO.setup(15,GPIO.OUT)
-GPIO.setup(2,GPIO.IN, pull_up_down=GPIO.PUD_UP) #Pull Water Output
+GPIO.setup(23,GPIO.IN, pull_up_down=GPIO.PUD_UP) #Pull Water Output
 GPIO.setup(3,GPIO.OUT) #Pull Water Output
+GPIO.setup(24,GPIO.IN, pull_up_down=GPIO.PUD_UP) #Pull Water Output
 GPIO.setup(4,GPIO.OUT) #EC Output
 
 acidMoniter_status = "OFF"
@@ -68,6 +69,13 @@ while True:
 		
     	elif pw_state == True:
                 pw_status =  "0"
+
+        ec_state = GPIO.input(24)
+	if ec_state == False:
+		ec_status = "1"
+		
+    	elif ec_state == True:
+                ec_status =  "0"       
         #Read Acid
         #acid_status = GPIO.input(2)
 	#if acid_status == False:
