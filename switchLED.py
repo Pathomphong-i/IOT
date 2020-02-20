@@ -61,11 +61,11 @@ while True:
                 sw_status =  "0"
 
         #Read Acid
-        state_Acid = GPIO.input(2)
-	if state_Acid == False:
+        Acid_status = GPIO.input(2)
+	if Acid_status == False:
 		client.publish("AcidMoniter_status", "ON")
 		
-    	elif state_Acid == True:		
+    	elif Acid_status == True:		
 		client.publish("AcidMoniter_status", "OFF")
 		
         
