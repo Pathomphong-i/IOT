@@ -13,11 +13,11 @@ GPIO.setup(15,GPIO.OUT)
 GPIO.setup(3,GPIO.OUT) #Pull Water Output
 GPIO.setup(4,GPIO.OUT) #EC Output
 
-AcidMoniter_status = "OFF"
+acidMoniter_status = "OFF"
 led_status = "OFF"
 sw_status = "0"
 mqtt_status = "0"
-Acid_status = "0"
+acid_status = "0"
 pw_status = "0"
 pwMoniter_status = "OFF"
 ec_status = "0"
@@ -61,12 +61,12 @@ while True:
                 sw_status =  "0"
 
         #Read Acid
-        Acid_status = GPIO.input(2)
-	if Acid_status == False:
-		client.publish("AcidMoniter_status", "ON")
+        acid_status = GPIO.input(2)
+	if acid_status == False:
+		client.publish("acidMoniter_status", "ON")
 		
-    	elif Acid_status == True:		
-		client.publish("AcidMoniter_status", "OFF")
+    	elif acid_status == True:		
+		client.publish("acidMoniter_status", "OFF")
 		
         
 	#LED control
