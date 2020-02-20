@@ -31,15 +31,16 @@ ecMoniter_status = "OFF"
 
 def on_message(client, userdata, message):
 	#set mqtt_status
-	global mqtt_status
+	global mqtt_status,mqtt_pw
+	
 	topic = str(message.topic)
 	data = str(message.payload.decode("utf-8"))
 	data = data.rstrip()
     
         if topic == "mqtt_pw" and data == "1":
-                status = "1"
+                pw_status = "1"
         elif topic == "mqtt_pw" and data == "0":
-                status = "0"
+                pw_status = "0"
                 
 	print("ToP/Mes",topic,data)
 	if topic == "mqtt_status" and data == "1":
@@ -68,16 +69,8 @@ while True:
 		sw_status = "1"
 		
     	elif state == True:
-                sw_status =  "0"
+                sw_status =  "0"        
 
-        
-
-        ec_state = GPIO.input(24)
-	if ec_state == False:
-		ec_status = "1"
-		
-    	elif ec_state == True:
-                ec_status =  "0"
                 
         #Read Acid
         #acid_status = GPIO.input(2)
