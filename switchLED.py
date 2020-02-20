@@ -57,6 +57,7 @@ client = mqtt.Client()
 client.username_pw_set(username=mqtt_user,password=mqtt_password)
 client.connect(mqtt_server,mqtt_port)
 #subscribe
+client.subscribe("mqtt_pw",0)
 client.subscribe("mqtt_status",0)
 client.on_message=on_message
 client.loop_start() 
@@ -111,20 +112,5 @@ while True:
 			pwMoniter_status = "OFF"
 			#publish
 			client.publish("pwMoniter_status", "OFF")
-			print("OFF")
-        #EC
-        if ec_status == "1" or mqtt_status == "1":
-        	GPIO.output(4,GPIO.HIGH) 
-		if ecMoniter_status == "OFF":
-			ecMoniter_status = "ON"
-			#publish
-			client.publish("ecMoniter_status", "ON")
-			print("ON")
-        elif ec_status == "0" or mqtt_status == "0":
-    	    	GPIO.output(4,GPIO.LOW)
-		if ecMoniter_status =="ON":
-			ecMoniter_status = "OFF"
-			#publish
-			client.publish("ecMoniter_status", "OFF")
-			print("OFF")
+			print("OFF")   
 	
