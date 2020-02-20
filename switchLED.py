@@ -1,4 +1,3 @@
-#gg
 #5630300474
 #5830300494
 #5930300267
@@ -11,6 +10,7 @@ GPIO.setwarnings(False)
 GPIO.setup(14,GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(2,GPIO.IN, pull_up_down=GPIO.PUD_UP) #Acide input
 GPIO.setup(15,GPIO.OUT)
+GPIO.setup(2,GPIO.IN, pull_up_down=GPIO.PUD_UP) #Pull Water Output
 GPIO.setup(3,GPIO.OUT) #Pull Water Output
 GPIO.setup(4,GPIO.OUT) #EC Output
 
@@ -61,13 +61,19 @@ while True:
     	elif state == True:
                 sw_status =  "0"
 
-        #Read Acid
-        acid_status = GPIO.input(2)
-	if acid_status == False:
-		client.publish("acidMoniter_status", "ON")
+        pw_state = GPIO.input(23)
+	if pw_state == False:
+		pw_status = "1"
 		
-    	elif acid_status == True:		
-		client.publish("acidMoniter_status", "OFF")
+    	elif pw_state == True:
+                pw_status =  "0"
+        #Read Acid
+        #acid_status = GPIO.input(2)
+	#if acid_status == False:
+	#	client.publish("acidMoniter_status", "ON")
+		
+    	#elif acid_status == True:		
+	#	client.publish("acidMoniter_status", "OFF")
 		
         
 	#LED control
