@@ -16,6 +16,16 @@ GPIO.setup(3,GPIO.OUT) #Pull Water Output
 GPIO.setup(24,GPIO.IN, pull_up_down=GPIO.PUD_UP) #Pull Water Output
 GPIO.setup(4,GPIO.OUT) #EC Output
 
+GPIO.setup(5,GPIO.IN, pull_up_down=GPIO.PUD_UP) #nut
+GPIO.setup(6,GPIO.OUT)
+
+GPIO.setup(13,GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(19,GPIO.OUT)
+
+GPIO.setup(16,GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(20,GPIO.OUT)
+#nut
+
 acidMoniter_status = "OFF"
 led_status = "OFF"
 sw_status = "0"
@@ -25,6 +35,14 @@ pw_status = "0"
 pwMoniter_status = "OFF"
 ec_status = "0"
 ecMoniter_status = "OFF"
+##nut
+pump_status ="0"
+motor_status =  "0"
+mixwater_status ="0"
+mixwaterMonitor ="OFF"
+pumpMonitor ="OFF"
+motorMonitor =  "OFF"
+
 
 def on_message(client, userdata, message):
 	#set mqtt_status
@@ -131,3 +149,52 @@ while True:
 			client.publish("ecMoniter_status", "OFF")
 			print("OFF")
 	
+#motor nut --------
+        if motor_status == "1" or mqtt_status == "1":
+        	GPIO.output(6,GPIO.HIGH) 
+		if motorMonitor == "OFF":
+			motorMonitor = "ON"
+			#publish
+			client.publish("motorMonitor", "ON")
+			print("MOTOR_ON")
+        elif motor_status == "0" or mqtt_status == "0":
+    	    	GPIO.output(6,GPIO.LOW)
+		if motorMonitor =="ON":
+			motorMonitor = "OFF"
+			#publish
+			client.publish("motorMonitor", "OFF")
+			print("MOTOR_OFF")
+
+#pump nut--------
+        if pump_status == "1" or mqtt_status == "1":
+        	GPIO.output(19,GPIO.HIGH) 
+		if pumpMonitor == "OFF":
+			pumpMonitor = "ON"
+			#publish
+			client.publish("pumpMonitor", "ON")
+			print("PUMP_ON")
+        elif pump_status == "0" or mqtt_status == "0":
+    	    	GPIO.output(19,GPIO.LOW)
+		if pumpMonitor =="ON":
+			pumpMonitor = "OFF"
+			#publish
+			client.publish("pumpMonitor", "OFF")
+			print("PUMP_OFF")
+
+
+#mixwater nut----------
+        if mixwater_status == "1" or mqtt_status == "1":
+        	GPIO.output(20,GPIO.HIGH) 
+		if mixwaterMonitor == "OFF":
+			mixwaterMonitor = "ON"
+			#publish
+			client.publish("mixwaterMonitor", "ON")
+			print("mixwater_ON")
+        elif mixwater_status == "0" or mqtt_status == "0":
+    	    	GPIO.output(20,GPIO.LOW)
+		if mixwaterMonitor =="ON":
+			mixwaterMonitor = "OFF"
+			#publish
+			client.publish("mixwaterMonitor", "OFF")
+			print("mixwater_OFF")
+        
