@@ -165,6 +165,7 @@ while True:
 			client.publish("pumpMonitor", "OFF")
 			print("PUMP_OFF")
 
+
 #mixwater nut----------
         if mixwater_status == "1" or mqtt_status == "1":
         	GPIO.output(20,GPIO.HIGH) 
