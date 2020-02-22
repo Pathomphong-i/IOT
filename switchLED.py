@@ -9,10 +9,13 @@ import paho.mqtt.client as mqtt
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(14,GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(2,GPIO.IN, pull_up_down=GPIO.PUD_UP) #Acide input
 GPIO.setup(15,GPIO.OUT)
+
+GPIO.setup(2,GPIO.IN, pull_up_down=GPIO.PUD_UP) #Acide input
+
 GPIO.setup(23,GPIO.IN, pull_up_down=GPIO.PUD_UP) #Pull Water input
 GPIO.setup(3,GPIO.OUT) #Pull Water Output
+
 GPIO.setup(24,GPIO.IN, pull_up_down=GPIO.PUD_UP) #EC input
 GPIO.setup(4,GPIO.OUT) #EC Output
 
@@ -23,24 +26,34 @@ led_status = "OFF"
 sw_status = "0"
 mqtt_status = "0"
 
-pw_status = "0"
 pwMoniter_status = "OFF"
+mqtt_pw = "0"
+pw_status = "0"
 
-ec_status = "0"
 ecMoniter_status = "OFF"
+mqtt_ec = "0"
+ec_status = "0"
 
 def on_message(client, userdata, message):
 	#set mqtt_status
-	global mqtt_status,mqtt_pw
+	global mqtt_status
+	global mqtt_pw
+	global mqtt_ec
 	
 	topic = str(message.topic)
 	data = str(message.payload.decode("utf-8"))
 	data = data.rstrip()
-    
+
+        #topic pw
         if topic == "mqtt_pw" and data == "1":
                 pw_status = "1"
         elif topic == "mqtt_pw" and data == "0":
                 pw_status = "0"
+        #topic EC
+        if topic == "mqtt_ec" and data == "1":
+                ec_status = "1"
+        elif topic == "mqtt_ec" and data == "0":
+                ec_status = "0"
                 
 	print("ToP/Mes",topic,data)
 	if topic == "mqtt_status" and data == "1":
@@ -112,5 +125,21 @@ while True:
 			pwMoniter_status = "OFF"
 			#publish
 			client.publish("pwMoniter_status", "OFF")
-			print("OFF")   
+			print("OFF")
+        #EC
+        ec_state = GPIO.input(24)
+        if ec_status == "1" or ec_state == True:
+        	GPIO.output(4,GPIO.HIGH) 
+		if ecMoniter_status == "OFF":
+			ecMoniter_status = "ON"
+			#publish
+			client.publish("ecMoniter_status", "ON")
+			print("ON")
+        elif ec_status == "0" or ec_state == False:
+    	    	GPIO.output(4,GPIO.LOW)
+		if ecMoniter_status =="ON":
+			ecMoniter_status = "OFF"
+			#publish
+			client.publish("ecMoniter_status", "OFF")
+			print("OFF")
 	
