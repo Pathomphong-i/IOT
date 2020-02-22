@@ -41,10 +41,10 @@ mqtt_pw = "0"
 pw_status = "0"
 
 ecMoniter_status = "OFF"
-<<<<<<< HEAD
+
 mqtt_ec = "0"
 ec_status = "0"
-=======
+
 ##nut
 pump_status ="0"
 motor_status =  "0"
@@ -53,7 +53,6 @@ mixwaterMonitor ="OFF"
 pumpMonitor ="OFF"
 motorMonitor =  "OFF"
 
->>>>>>> 6b38b676a12480fdd1902cf3e13b3f070c32aa99
 
 def on_message(client, userdata, message):
 	#set mqtt_status
