@@ -19,15 +19,15 @@ GPIO.setup(3,GPIO.OUT) #Pull Water Output
 GPIO.setup(24,GPIO.IN, pull_up_down=GPIO.PUD_UP) #EC input
 GPIO.setup(4,GPIO.OUT) #EC Output
 
-GPIO.setup(5,GPIO.IN, pull_up_down=GPIO.PUD_UP) #nut
-GPIO.setup(6,GPIO.OUT)
+GPIO.setup(5,GPIO.IN, pull_up_down=GPIO.PUD_UP) #nut motorINPUT
+GPIO.setup(6,GPIO.OUT)#nut motorOUTPUT
 
-GPIO.setup(13,GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(19,GPIO.OUT)
+GPIO.setup(13,GPIO.IN, pull_up_down=GPIO.PUD_UP) #nut pumpINPUT
+GPIO.setup(19,GPIO.OUT)#nut pumpOUTPUT
 
-GPIO.setup(16,GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(20,GPIO.OUT)
-#nut
+GPIO.setup(16,GPIO.IN, pull_up_down=GPIO.PUD_UP) #nut mixwaterINPUT
+GPIO.setup(20,GPIO.OUT)#nut mixwaterOUTPUT
+
 
 acidMoniter_status = "OFF"
 acid_status = "0"
@@ -41,17 +41,23 @@ mqtt_pw = "0"
 pw_status = "0"
 
 ecMoniter_status = "OFF"
-
 mqtt_ec = "0"
 ec_status = "0"
 
 ##nut
-pump_status ="0"
 motor_status =  "0"
+pump_status ="0"
 mixwater_status ="0"
-mixwaterMonitor ="OFF"
-pumpMonitor ="OFF"
+
+
+mqtt_motor ="0"
+mqtt_pump ="0"
+mqtt_mixwater ="0"
+
+
 motorMonitor =  "OFF"
+pumpMonitor ="OFF"
+mixwaterMonitor ="OFF"
 
 
 def on_message(client, userdata, message):
@@ -74,6 +80,24 @@ def on_message(client, userdata, message):
                 ec_status = "1"
         elif topic == "mqtt_ec" and data == "0":
                 ec_status = "0"
+
+        #topic motor
+        if topic == "mqtt_motor" and data == "1":
+                ทmotor_status = "1"
+        elif topic == "mqtt_motor" and data == "0":
+                motor_status = "0"
+        #topic pump
+        if topic == "mqtt_pump" and data == "1":
+                pump_status = "1"
+        elif topic == "mqtt_pump" and data == "0":
+                pump_status = "0"
+
+        #topic mixwater
+        if topic == "mqtt_mixwater" and data == "1":
+                mixwater_status = "1"
+        elif topic == "mqtt_mixwater" and data == "0":
+                mixwater_status = "0"
+
                 
 	print("ToP/Mes",topic,data)
 	if topic == "mqtt_status" and data == "1":
@@ -91,6 +115,7 @@ client.username_pw_set(username=mqtt_user,password=mqtt_password)
 client.connect(mqtt_server,mqtt_port)
 #subscribe
 client.subscribe("mqtt_pw",0)
+client.subscribe("mqtt_motor",0)
 client.subscribe("mqtt_status",0)
 client.on_message=on_message
 client.loop_start() 
