@@ -100,8 +100,8 @@ client.username_pw_set(username=mqtt_user,password=mqtt_password)
 client.connect(mqtt_server,mqtt_port)
 #subscribe
 client.subscribe([("mqtt_pump_water_loop_status",0),("mqtt_pump_water_tank_status",0),
-	("mqtt_mix_water_status",0),("mqtt_vale_A_status",0),("mtqq_vale_B_status",0),
-	("mqtt_vale_Acid_status",0),("mqtt_switch_status",0),("mqtt_led_status",0)])
+	("mqtt_mix_water_status",0),("mqtt_valve_A_status",0),("mtqq_valve_B_status",0),
+	("mqtt_valve_Acid_status",0),("mqtt_switch_status",0),("mqtt_led_status",0)])
 client.on_message=on_message
 client.loop_start() 
 
