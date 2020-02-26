@@ -167,7 +167,7 @@ while True:
 		mix_water_status = "OFF"
 
 	if mqtt_valve_A_status == "ON":
-		GPIO.output(valve_A_pin.GPIO.LOW)
+		GPIO.output(valve_A_pin,GPIO.LOW)
 		valve_A_status = "ON"
 	elif mqtt_valve_A_status == "OFF":
 		GPIO.output(valve_A_pin,GPIO.HIGH)
