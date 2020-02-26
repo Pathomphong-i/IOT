@@ -35,7 +35,7 @@ GPIO.setup(valve_Acid_pin,GPIO.OUT)
 GPIO.setup(led_pin,GPIO.OUT)
 
 #preset relay active low "OFF"
-GPIO.out(pump_water_loop_pin,GPIO.HIGH)
+GPIO.output(pump_water_loop_pin,GPIO.HIGH)
 GPIO.output(pump_water_tank_pin,GPIO.HIGH)
 GPIO.output(mix_water_pin,GPIO.HIGH)
 GPIO.output(valve_A_pin,GPIO.HIGH)
@@ -65,8 +65,7 @@ mqtt_led_status = "OFF"
 
 def on_message(client, userdata, message):
 	#set value from mqtt subscribe
-	global mqtt_pump_water_loop_status, mqtt_pump_water_tank_status, mqtt_mix_water_status, 
-		mqtt_valve_A_status, mqtt_valve_B_status, mqtt_valve_Acid_status, mqtt_switch_status, mqtt_led_status
+	global mqtt_pump_water_loop_status, mqtt_pump_water_tank_status, mqtt_mix_water_status, mqtt_valve_A_status, mqtt_valve_B_status, mqtt_valve_Acid_status, mqtt_switch_status, mqtt_led_status
 
 	topic = str(message.topic)
 	data = str(message.payload.decode("utf-8"))
@@ -138,7 +137,7 @@ while True:
 			client.publish("pi_led_status", "ON")
 			print("Led_ON")
    	elif switch_status == "OFF" or mqtt_switch_status == "OFF":
-    	    	GPIO.output(led_status,GPIO.LOW)
+    	    	GPIO.output(led_pin,GPIO.LOW)
 		if led_status =="ON":
 			led_status = "OFF"
 			#publish
@@ -150,7 +149,7 @@ while True:
 		GPIO.output(pump_water_loop_pin,GPIO.LOW)
 		pump_water_loop_status = "ON"
 	elif mqtt_pump_water_loop_status == "OFF":
-		GPIO.out(pump_water_loop_pin,GPIO.HIGH)
+		GPIO.output(pump_water_loop_pin,GPIO.HIGH)
 		pump_water_loop_status = "OFF"
 
 	if mqtt_pump_water_tank_status == "ON":
