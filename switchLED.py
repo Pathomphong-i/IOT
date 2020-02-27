@@ -10,8 +10,8 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
 #input
-switch_pin = 2
-ec_sensor_pin = 3
+switch_pin = 15
+ec_sensor_pin = 18
 ph_sensor_pin = 4
 #output
 pump_water_loop_pin = 0
