@@ -156,7 +156,8 @@ while True:
 		#database
 		data = {'pump_water_loop_status' : pump_water_loop_status,
                         'Time' : time.strftime('%X %x %Z')}
-                firebase.post('/zIC2ipG3OHNMh6iX9qRr/mqtt_pump_water_loop_status', data)
+                result = firebase.post('/zIC2ipG3OHNMh6iX9qRr/mqtt_pump_water_loop_status', data)
+                print(result)
                 
 	elif mqtt_pump_water_loop_status == "OFF":
 		GPIO.output(pump_water_loop_pin,GPIO.HIGH)
@@ -164,22 +165,26 @@ while True:
 		#database
 		data = {'pump_water_loop_status' : pump_water_loop_status,
                         'Time' : time.strftime('%X %x %Z')}
-                firebase.post('/zIC2ipG3OHNMh6iX9qRr/mqtt_pump_water_loop_status', data)
-
+                result = firebase.post('/zIC2ipG3OHNMh6iX9qRr/mqtt_pump_water_loop_status', data)
+                print(result)
+                
 	if mqtt_pump_water_tank_status == "ON":
 		GPIO.output(pump_water_tank_pin,GPIO.LOW)
 		pump_water_tank_status = "ON"
 		#database
 		data = {'pump_water_tank_status' : pump_water_tank_status,
                         'Time' : time.strftime('%X %x %Z')}
-                firebase.post('/zIC2ipG3OHNMh6iX9qRr/mqtt_pump_water_tank_status', data)
+                result = firebase.post('/zIC2ipG3OHNMh6iX9qRr/mqtt_pump_water_tank_status', data)
+                print(result)
+                
 	elif mqtt_pump_water_tank_status == "OFF":
 		GPIO.output(pump_water_tank_pin,GPIO.HIGH)
 		pump_water_tank_status = "OFF"
 		#database
 		data = {'pump_water_tank_status' : pump_water_tank_status,
                         'Time' : time.strftime('%X %x %Z')}
-                firebase.post('/zIC2ipG3OHNMh6iX9qRr/mqtt_pump_water_tank_status', data)
+                result = firebase.post('/zIC2ipG3OHNMh6iX9qRr/mqtt_pump_water_tank_status', data)
+                print(result)
 	
 	if mqtt_mix_water_status == "ON":
 		GPIO.output(mix_water_pin,GPIO.LOW)
@@ -187,14 +192,17 @@ while True:
 		#database
 		data = {'mix_water_status' : mix_water_status,
                         'Time' : time.strftime('%X %x %Z')}
-                firebase.post('/zIC2ipG3OHNMh6iX9qRr/mqtt_mix_water_status', data)
+                result = firebase.post('/zIC2ipG3OHNMh6iX9qRr/mqtt_mix_water_status', data)
+                print(result)
+                
 	elif mqtt_mix_water_status == "OFF":
 		GPIO.output(mix_water_pin,GPIO.HIGH)
 		mix_water_status = "OFF"
 		#database
 		data = {'mix_water_status' : mix_water_status,
                         'Time' : time.strftime('%X %x %Z')}
-		firebase.post('/zIC2ipG3OHNMh6iX9qRr/mqtt_mix_water_status', data)
+		result = firebase.post('/zIC2ipG3OHNMh6iX9qRr/mqtt_mix_water_status', data)
+		print(result)
 
 	if mqtt_valve_A_status == "ON":
 		GPIO.output(valve_A_pin,GPIO.LOW)
@@ -202,28 +210,33 @@ while True:
 		#database
 		data = {'valve_A_status' : valve_A_status,
                         'Time' : time.strftime('%X %x %Z')}
-		firebase.post('/zIC2ipG3OHNMh6iX9qRr/valve_A_status', data)
+		result = firebase.post('/zIC2ipG3OHNMh6iX9qRr/valve_A_status', data)
+		print(result)
+		
 	elif mqtt_valve_A_status == "OFF":
 		GPIO.output(valve_A_pin,GPIO.HIGH)
 		valve_A_status = "OFF"
 		#database
 		data = {'valve_A_status' : valve_A_status,
                         'Time' : time.strftime('%X %x %Z')}
-		firebase.post('/zIC2ipG3OHNMh6iX9qRr/valve_A_status', data)
-
+		result = firebase.post('/zIC2ipG3OHNMh6iX9qRr/valve_A_status', data)
+                print(result)
+                
 	if mqtt_valve_B_status == "ON":
 		GPIO.output(valve_B_pin,GPIO.LOW)
 		valve_B_status = "ON"
 		#database
 		data = {'valve_B_status' : valve_B_status,
                         'Time' : time.strftime('%X %x %Z')}
-		firebase.post('/zIC2ipG3OHNMh6iX9qRr/valve_B_status', data)
+		result = firebase.post('/zIC2ipG3OHNMh6iX9qRr/valve_B_status', data)
+		print(result)
 	elif mqtt_valve_B_status == "OFF":
 		GPIO.output(valve_B_pin,GPIO.HIGH)
 		#database
 		data = {'valve_B_status' : valve_B_status,
                         'Time' : time.strftime('%X %x %Z')}
-		firebase.post('/zIC2ipG3OHNMh6iX9qRr/valve_B_status', data)
+		result = firebase.post('/zIC2ipG3OHNMh6iX9qRr/valve_B_status', data)
+		print(result)
 
 	if mqtt_valve_Acid_status == "ON":
 		GPIO.output(valve_Acid_pin,GPIO.LOW)
@@ -231,11 +244,14 @@ while True:
 		#database
 		data = {'valve_Acid_status' : valve_Acid_status,
                         'Time' : time.strftime('%X %x %Z')}
-		firebase.post('/zIC2ipG3OHNMh6iX9qRr/valve_Acid_status', data)
+		result = firebase.post('/zIC2ipG3OHNMh6iX9qRr/valve_Acid_status', data)
+		print(result)
+		
 	elif mqtt_valve_Acid_status == "OFF":
 		GPIO.output(valve_Acid_pin,GPIO.HIGH)
 		valve_Acid_status = "OFF"
 		#database
 		data = {'valve_Acid_status' : valve_Acid_status,
                         'Time' : time.strftime('%X %x %Z')}
-		firebase.post('/zIC2ipG3OHNMh6iX9qRr/valve_Acid_status', data)
+		result = firebase.post('/zIC2ipG3OHNMh6iX9qRr/valve_Acid_status', data)
+		print(result)
