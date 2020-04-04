@@ -7,4 +7,4 @@ while True:
       adc_chanal = 0
       adc_values = adc.read_adc(adc_chanal,gain=GAIN)
       volt = adc_values * 0.000125
-      print("volt =",volt)
+      print('volt =',volt)
