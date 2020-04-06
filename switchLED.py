@@ -117,7 +117,7 @@ while True:
 		pi_switch_status =  "OFF" 
 
 	if pi_switch_status == "ON" or mqtt_switch_status == "ON":
-        GPIO.output(led_pin,GPIO.HIGH) 
+		GPIO.output(led_pin,GPIO.HIGH) 
 		if pi_led_status == "OFF":
 			pi_led_status = "ON"
 			client.publish("pi_led_status", "ON")
