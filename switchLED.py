@@ -183,3 +183,5 @@ while True:
 		#0v 4640 3.3 5040  3.3/dif
 	volt = (adc_values - 4640)*(3.3/(5040-4640))
 	print("ph_volt = %.2f" %(volt))
+
+	time.sleep(1)
