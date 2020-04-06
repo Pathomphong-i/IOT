@@ -6,6 +6,7 @@ import time
 import RPi.GPIO as GPIO
 import paho.mqtt.client as mqtt
 import Adafruit_ADS1x15 
+import math
 
 adc = Adafruit_ADS1x15.ADS1115() 
 GAIN =1
@@ -132,56 +133,97 @@ while True:
 	#pump water loop
 	if mqtt_pump_water_loop_status == "ON":
 		GPIO.output(pump_water_loop_pin,GPIO.LOW)
-		pi_pump_water_loop_status = "ON"
+		if pi_pump_water_loop_status == "OFF":
+			pi_pump_water_loop_status = "ON"
+			client.publish("pi_pump_water_loop_status", "ON")
+			print("water_loop_ON")
 	elif mqtt_pump_water_loop_status == "OFF":
 		GPIO.output(pump_water_loop_pin,GPIO.HIGH)
-		pi_pump_water_loop_status = "OFF"
+		if pi_pump_water_loop_status == "ON":
+			pi_pump_water_loop_status = "OFF"
+			client.publish("pi_pump_water_loop_status", "OFF")
+			print("water_loop_OFF")
 	#pump water tank
 	if mqtt_pump_water_tank_status == "ON":
 		GPIO.output(pump_water_tank_pin,GPIO.LOW)
-		pi_pump_water_tank_status = "ON"
+		if pi_pump_water_tank_status == "OFF":
+			pi_pump_water_tank_status = "ON"
+			client.publish("pi_led_spi_pump_water_tank_status", "ON")
+			print("water_tank_ON")
 	elif mqtt_pump_water_tank_status == "OFF":
 		GPIO.output(pump_water_tank_pin,GPIO.HIGH)
-		pi_pump_water_tank_status = "OFF"
+		if pi_pump_water_tank_status == "ON":
+			pi_pump_water_tank_status = "OFF"
+			client.publish("pi_pump_water_tank_status", "OFF")
+			print("water_tank_OFF")
 	#mix water
 	if mqtt_mix_water_status == "ON":
 		GPIO.output(mix_water_pin,GPIO.LOW)
-		pi_mix_water_status = "ON"
+		if pi_mix_water_status == "OFF":
+			pi_mix_water_status = "ON"
+			client.publish("pi_mix_water_status", "ON")
+			print("mix_water_ON")
 	elif mqtt_mix_water_status == "OFF":
 		GPIO.output(mix_water_pin,GPIO.HIGH)
-		pi_mix_water_status = "OFF"
+		if pi_mix_water_status == "ON":
+			pi_mix_water_status = "OFF"
+			client.publish("pi_mix_water_status", "OFF")
+			print("mix_water_OFF")
 	#valve A
 	if mqtt_valve_A_status == "ON":
 		GPIO.output(valve_A_pin,GPIO.LOW)
-		pi_valve_A_status = "ON"
+		if pi_valve_A_status == "OFF":
+			pi_valve_A_status = "ON"
+			client.publish("pi_valve_A_status", "ON")
+			print("A_ON")
 	elif mqtt_valve_A_status == "OFF":
 		GPIO.output(valve_A_pin,GPIO.HIGH)
-		pi_valve_A_status = "OFF"
+		if pi_valve_A_status == "ON":
+			pi_valve_A_status = "OFF"
+			client.publish("pi_valve_A_status", "OFF")
+			print("A_OFF")
 	#valve B
 	if mqtt_valve_B_status == "ON":
 		GPIO.output(valve_B_pin,GPIO.LOW)
-		pi_valve_B_status = "ON"
+		if pi_valve_B_status == "OFF":
+			pi_valve_B_status = "ON"
+			client.publish("pi_valve_B_status", "ON")
+			print("B_ON")
 	elif mqtt_valve_B_status == "OFF":
 		GPIO.output(valve_B_pin,GPIO.HIGH)
-		pi_valve_B_status = "OFF"
+		if pi_valve_B_status == "ON":
+			pi_valve_B_status = "OFF"
+			client.publish("pi_valve_B_status", "OFF")
+			print("B_OFF")
 	#valve acid
 	if mqtt_valve_Acid_status == "ON":
 		GPIO.output(valve_Acid_pin,GPIO.LOW)
-		pi_valve_Acid_status = "ON"
+		if pi_valve_Acid_status == "OFF":
+			pi_valve_Acid_status = "ON"
+			client.publish("pi_valve_Acid_status", "ON")
+			print("Acid_ON")
 	elif mqtt_valve_Acid_status == "OFF":
 		GPIO.output(valve_Acid_pin,GPIO.HIGH)
-		pi_valve_Acid_status = "OFF"
+		if pi_valve_Acid_status == "ON":
+			pi_valve_Acid_status = "OFF"
+			client.publish("pi_valve_Acid_status", "OFF")
+			print("Acid_OFF")
 	#ec
-	adc_chanal = 0
-	adc_values = adc.read_adc(adc_chanal,gain=GAIN)
+	ec_adc_chanal = 0
+	ec_values = adc.read_adc(ec_adc_chanal,gain=GAIN)
 		#0v 4640 3.3 5040  3.3/dif
-	volt = (adc_values - 4640)*(3.3/(5040-4640))
-	print("ec_volt = %.2f" %(volt))
+	ec_volt = (ec_adc_values - 4640)*(3.3/(5040-4640))
+	ec_new_volt = math.ceil(ec_volt*100)/100
+	client.publish("pi_ec_sensor_status", ec_new_volt)
+	print("ec_volt = %.2f" %(ec_volt))
+
 	#ph
-	adc_chanal = 1
-	adc_values = adc.read_adc(adc_chanal,gain=GAIN)
+	ph_adc_chanal = 1
+	ph_adc_values = adc.read_adc(ph_adc_chanal,gain=GAIN)
 		#0v 4640 3.3 5040  3.3/dif
-	volt = (adc_values - 4640)*(3.3/(5040-4640))
-	print("ph_volt = %.2f" %(volt))
+	ph_volt = (adc_values - 4640)*(3.3/(5040-4640))
+	ph_new_volt = math.ceil(ph_volt*100)/100
+	client.publish("pi_ph_sensor_status", ph_new_volt)
+	print("ph_volt = %.2f" %(ph_volt))
 
 	time.sleep(1)
