@@ -68,8 +68,7 @@ mqtt_switch_status = "OFF"
 
 def on_message(client, userdata, message):
 	#set value from mqtt subscribe
-	global mqtt_pump_water_loop_status, mqtt_pump_water_tank_status, mqtt_mix_water_status, 
-	mqtt_valve_A_status, mqtt_valve_B_status, mqtt_valve_Acid_status, mqtt_switch_status
+	global mqtt_pump_water_loop_status, mqtt_pump_water_tank_status, mqtt_mix_water_status, mqtt_valve_A_status, mqtt_valve_B_status, mqtt_valve_Acid_status, mqtt_switch_status
 
 	topic = str(message.topic)
 	data = str(message.payload.decode("utf-8"))
