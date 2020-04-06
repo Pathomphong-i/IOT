@@ -210,7 +210,7 @@ while True:
 			print("Acid_OFF")
 	#ec
 	ec_adc_chanal = 0
-	ec_values = adc.read_adc(ec_adc_chanal,gain=GAIN)
+	ec_adc_values = adc.read_adc(ec_adc_chanal,gain=GAIN)
 		#0v 4640 3.3 5040  3.3/dif
 	ec_volt = (ec_adc_values - 4640)*(3.3/(5040-4640))
 	ec_new_volt = math.ceil(ec_volt*100)/100
@@ -221,7 +221,7 @@ while True:
 	ph_adc_chanal = 1
 	ph_adc_values = adc.read_adc(ph_adc_chanal,gain=GAIN)
 		#0v 4640 3.3 5040  3.3/dif
-	ph_volt = (adc_values - 4640)*(3.3/(5040-4640))
+	ph_volt = (ph_adc_values - 4640)*(3.3/(5040-4640))
 	ph_new_volt = math.ceil(ph_volt*100)/100
 	client.publish("pi_ph_sensor_status", ph_new_volt)
 	print("ph_volt = %.2f" %(ph_volt))
