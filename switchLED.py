@@ -106,9 +106,6 @@ client.subscribe([("mqtt_pump_water_loop_status",0),("mqtt_pump_water_tank_statu
 	("mqtt_valve_Acid_status",0),("mqtt_switch_status",0)])
 client.on_message=on_message
 client.loop_start() 
-
-
-def led_control():
 	
 #main
 while True:
