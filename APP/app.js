@@ -1,7 +1,7 @@
 var express = require("express");
 
 var app = express();
-
+app.use(express.json())
 var url = "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
 var MongoClient = require('mongodb').MongoClient;
 
@@ -11,8 +11,18 @@ app.get("/pi_led_status", function(req, res, next) {
         if (err) throw err;
         var dbo = db.db("IOT");        
         dbo.collection("pi_led_status").find({}).toArray(function(err, result) {
-            if (err) throw err;
-            res.status(200).send(result);
+            var output = '<html><header><title>pi_led_status</title></header><body>';
+            output += '<h1>pi_led_status</h1>';
+            output += '<table border="1"><tr><td><b>' + 'Status' + '</b></td><td><b>' + 'Time' + '</b></td></tr>';
+            // process todo list
+            result.forEach(function(todo){
+                output += '<tr><td>' + todo.status + '</td><td>' + todo.time + '</td></tr>';
+            });
+            // write HTML output (ending)
+            output += '</table></body></html>'
+            // send output back
+            res.send(output);
+            // log data to the console as well
             console.log(result);
             db.close();
         });
@@ -24,8 +34,18 @@ app.get("/pi_pump_water_loop_status", function(req, res, next) {
         if (err) throw err;
         var dbo = db.db("IOT");        
         dbo.collection("pi_pump_water_loop_status").find({}).toArray(function(err, result) {
-            if (err) throw err;
-            res.status(200).send(result);
+            var output = '<html><header><title>pi_pump_water_loop_status</title></header><body>';
+            output += '<h1>pi_pump_water_loop_status</h1>';
+            output += '<table border="1"><tr><td><b>' + 'Status' + '</b></td><td><b>' + 'Time' + '</b></td></tr>';
+            // process todo list
+            result.forEach(function(todo){
+                output += '<tr><td>' + todo.status + '</td><td>' + todo.time + '</td></tr>';
+            });
+            // write HTML output (ending)
+            output += '</table></body></html>'
+            // send output back
+            res.send(output);
+            // log data to the console as well
             console.log(result);
             db.close();
         });
@@ -37,8 +57,18 @@ app.get("/pi_pump_water_tank_status", function(req, res, next) {
         if (err) throw err;
         var dbo = db.db("IOT");        
         dbo.collection("pi_pump_water_tank_status").find({}).toArray(function(err, result) {
-            if (err) throw err;
-            res.status(200).send(result);
+            var output = '<html><header><title>pi_pump_water_tank_status</title></header><body>';
+            output += '<h1>pi_pump_water_tank_status</h1>';
+            output += '<table border="1"><tr><td><b>' + 'Status' + '</b></td><td><b>' + 'Time' + '</b></td></tr>';
+            // process todo list
+            result.forEach(function(todo){
+                output += '<tr><td>' + todo.status + '</td><td>' + todo.time + '</td></tr>';
+            });
+            // write HTML output (ending)
+            output += '</table></body></html>'
+            // send output back
+            res.send(output);
+            // log data to the console as well
             console.log(result);
             db.close();
         });
@@ -50,8 +80,18 @@ app.get("/pi_mix_water_status", function(req, res, next) {
         if (err) throw err;
         var dbo = db.db("IOT");        
         dbo.collection("pi_mix_water_status").find({}).toArray(function(err, result) {
-            if (err) throw err;
-            res.status(200).send(result);
+            var output = '<html><header><title>pi_mix_water_status</title></header><body>';
+            output += '<h1>pi_mix_water_status</h1>';
+            output += '<table border="1"><tr><td><b>' + 'Status' + '</b></td><td><b>' + 'Time' + '</b></td></tr>';
+            // process todo list
+            result.forEach(function(todo){
+                output += '<tr><td>' + todo.status + '</td><td>' + todo.time + '</td></tr>';
+            });
+            // write HTML output (ending)
+            output += '</table></body></html>'
+            // send output back
+            res.send(output);
+            // log data to the console as well
             console.log(result);
             db.close();
         });
@@ -63,8 +103,18 @@ app.get("/pi_valve_A_status", function(req, res, next) {
         if (err) throw err;
         var dbo = db.db("IOT");        
         dbo.collection("pi_valve_A_status").find({}).toArray(function(err, result) {
-            if (err) throw err;
-            res.status(200).send(result);
+            var output = '<html><header><title>pi_valve_A_status</title></header><body>';
+            output += '<h1>pi_valve_A_status</h1>';
+            output += '<table border="1"><tr><td><b>' + 'Status' + '</b></td><td><b>' + 'Time' + '</b></td></tr>';
+            // process todo list
+            result.forEach(function(todo){
+                output += '<tr><td>' + todo.status + '</td><td>' + todo.time + '</td></tr>';
+            });
+            // write HTML output (ending)
+            output += '</table></body></html>'
+            // send output back
+            res.send(output);
+            // log data to the console as well
             console.log(result);
             db.close();
         });
@@ -76,8 +126,18 @@ app.get("/pi_valve_B_status", function(req, res, next) {
         if (err) throw err;
         var dbo = db.db("IOT");        
         dbo.collection("pi_valve_B_status").find({}).toArray(function(err, result) {
-            if (err) throw err;
-            res.status(200).send(result);
+            var output = '<html><header><title>pi_valve_B_status</title></header><body>';
+            output += '<h1>pi_valve_B_status</h1>';
+            output += '<table border="1"><tr><td><b>' + 'Status' + '</b></td><td><b>' + 'Time' + '</b></td></tr>';
+            // process todo list
+            result.forEach(function(todo){
+                output += '<tr><td>' + todo.status + '</td><td>' + todo.time + '</td></tr>';
+            });
+            // write HTML output (ending)
+            output += '</table></body></html>'
+            // send output back
+            res.send(output);
+            // log data to the console as well
             console.log(result);
             db.close();
         });
@@ -89,8 +149,18 @@ app.get("/pi_valve_Acid_status", function(req, res, next) {
         if (err) throw err;
         var dbo = db.db("IOT");        
         dbo.collection("pi_valve_Acid_status").find({}).toArray(function(err, result) {
-            if (err) throw err;
-            res.status(200).send(result);
+            var output = '<html><header><title>pi_valve_Acid_status</title></header><body>';
+            output += '<h1>pi_valve_Acid_status</h1>';
+            output += '<table border="1"><tr><td><b>' + 'Status' + '</b></td><td><b>' + 'Time' + '</b></td></tr>';
+            // process todo list
+            result.forEach(function(todo){
+                output += '<tr><td>' + todo.status + '</td><td>' + todo.time + '</td></tr>';
+            });
+            // write HTML output (ending)
+            output += '</table></body></html>'
+            // send output back
+            res.send(output);
+            // log data to the console as well
             console.log(result);
             db.close();
         });
@@ -102,8 +172,18 @@ app.get("/pi_ec_sensor_status", function(req, res, next) {
         if (err) throw err;
         var dbo = db.db("IOT");        
         dbo.collection("pi_ec_sensor_status").find({}).toArray(function(err, result) {
-            if (err) throw err;
-            res.status(200).send(result);
+            var output = '<html><header><title>pi_ec_sensor_status</title></header><body>';
+            output += '<h1>pi_ec_sensor_status</h1>';
+            output += '<table border="1"><tr><td><b>' + 'Status' + '</b></td><td><b>' + 'Time' + '</b></td></tr>';
+            // process todo list
+            result.forEach(function(todo){
+                output += '<tr><td>' + todo.status + '</td><td>' + todo.time + '</td></tr>';
+            });
+            // write HTML output (ending)
+            output += '</table></body></html>'
+            // send output back
+            res.send(output);
+            // log data to the console as well
             console.log(result);
             db.close();
         });
@@ -115,8 +195,18 @@ app.get("/pi_ph_sensor_status", function(req, res, next) {
         if (err) throw err;
         var dbo = db.db("IOT");        
         dbo.collection("pi_ph_sensor_status").find({}).toArray(function(err, result) {
-            if (err) throw err;
-            res.status(200).send(result);
+            var output = '<html><header><title>pi_ph_sensor_status</title></header><body>';
+            output += '<h1>pi_ph_sensor_status</h1>';
+            output += '<table border="1"><tr><td><b>' + 'Status' + '</b></td><td><b>' + 'Time' + '</b></td></tr>';
+            // process todo list
+            result.forEach(function(todo){
+                output += '<tr><td>' + todo.status + '</td><td>' + todo.time + '</td></tr>';
+            });
+            // write HTML output (ending)
+            output += '</table></body></html>'
+            // send output back
+            res.send(output);
+            // log data to the console as well
             console.log(result);
             db.close();
         });
@@ -128,8 +218,18 @@ app.get("/mqtt_pump_water_loop_status", function(req, res, next) {
         if (err) throw err;
         var dbo = db.db("IOT");        
         dbo.collection("mqtt_pump_water_loop_status").find({}).toArray(function(err, result) {
-            if (err) throw err;
-            res.status(200).send(result);
+            var output = '<html><header><title>mqtt_pump_water_loop_status</title></header><body>';
+            output += '<h1>mqtt_pump_water_loop_status</h1>';
+            output += '<table border="1"><tr><td><b>' + 'Status' + '</b></td><td><b>' + 'Time' + '</b></td></tr>';
+            // process todo list
+            result.forEach(function(todo){
+                output += '<tr><td>' + todo.status + '</td><td>' + todo.time + '</td></tr>';
+            });
+            // write HTML output (ending)
+            output += '</table></body></html>'
+            // send output back
+            res.send(output);
+            // log data to the console as well
             console.log(result);
             db.close();
         });
@@ -141,8 +241,18 @@ app.get("/mqtt_pump_water_tank_status", function(req, res, next) {
         if (err) throw err;
         var dbo = db.db("IOT");        
         dbo.collection("mqtt_pump_water_tank_status").find({}).toArray(function(err, result) {
-            if (err) throw err;
-            res.status(200).send(result);
+            var output = '<html><header><title>mqtt_pump_water_tank_status</title></header><body>';
+            output += '<h1>mqtt_pump_water_tank_status</h1>';
+            output += '<table border="1"><tr><td><b>' + 'Status' + '</b></td><td><b>' + 'Time' + '</b></td></tr>';
+            // process todo list
+            result.forEach(function(todo){
+                output += '<tr><td>' + todo.status + '</td><td>' + todo.time + '</td></tr>';
+            });
+            // write HTML output (ending)
+            output += '</table></body></html>'
+            // send output back
+            res.send(output);
+            // log data to the console as well
             console.log(result);
             db.close();
         });
@@ -154,8 +264,18 @@ app.get("/mqtt_mix_water_status", function(req, res, next) {
         if (err) throw err;
         var dbo = db.db("IOT");        
         dbo.collection("mqtt_mix_water_status").find({}).toArray(function(err, result) {
-            if (err) throw err;
-            res.status(200).send(result);
+            var output = '<html><header><title>mqtt_mix_water_status</title></header><body>';
+            output += '<h1>mqtt_mix_water_status</h1>';
+            output += '<table border="1"><tr><td><b>' + 'Status' + '</b></td><td><b>' + 'Time' + '</b></td></tr>';
+            // process todo list
+            result.forEach(function(todo){
+                output += '<tr><td>' + todo.status + '</td><td>' + todo.time + '</td></tr>';
+            });
+            // write HTML output (ending)
+            output += '</table></body></html>'
+            // send output back
+            res.send(output);
+            // log data to the console as well
             console.log(result);
             db.close();
         });
@@ -167,8 +287,18 @@ app.get("/mqtt_valve_A_status", function(req, res, next) {
         if (err) throw err;
         var dbo = db.db("IOT");        
         dbo.collection("mqtt_valve_A_status").find({}).toArray(function(err, result) {
-            if (err) throw err;
-            res.status(200).send(result);
+            var output = '<html><header><title>mqtt_valve_A_status</title></header><body>';
+            output += '<h1>mqtt_valve_A_status</h1>';
+            output += '<table border="1"><tr><td><b>' + 'Status' + '</b></td><td><b>' + 'Time' + '</b></td></tr>';
+            // process todo list
+            result.forEach(function(todo){
+                output += '<tr><td>' + todo.status + '</td><td>' + todo.time + '</td></tr>';
+            });
+            // write HTML output (ending)
+            output += '</table></body></html>'
+            // send output back
+            res.send(output);
+            // log data to the console as well
             console.log(result);
             db.close();
         });
@@ -180,8 +310,18 @@ app.get("/mqtt_valve_B_status", function(req, res, next) {
         if (err) throw err;
         var dbo = db.db("IOT");        
         dbo.collection("mqtt_valve_B_status").find({}).toArray(function(err, result) {
-            if (err) throw err;
-            res.status(200).send(result);
+            var output = '<html><header><title>mqtt_valve_B_status</title></header><body>';
+            output += '<h1>mqtt_valve_B_status</h1>';
+            output += '<table border="1"><tr><td><b>' + 'Status' + '</b></td><td><b>' + 'Time' + '</b></td></tr>';
+            // process todo list
+            result.forEach(function(todo){
+                output += '<tr><td>' + todo.status + '</td><td>' + todo.time + '</td></tr>';
+            });
+            // write HTML output (ending)
+            output += '</table></body></html>'
+            // send output back
+            res.send(output);
+            // log data to the console as well
             console.log(result);
             db.close();
         });
@@ -193,8 +333,18 @@ app.get("/mqtt_switch_status", function(req, res, next) {
         if (err) throw err;
         var dbo = db.db("IOT");        
         dbo.collection("mqtt_switch_status").find({}).toArray(function(err, result) {
-            if (err) throw err;
-            res.status(200).send(result);
+            var output = '<html><header><title>mqtt_switch_status</title></header><body>';
+            output += '<h1>mqtt_switch_status</h1>';
+            output += '<table border="1"><tr><td><b>' + 'Status' + '</b></td><td><b>' + 'Time' + '</b></td></tr>';
+            // process todo list
+            result.forEach(function(todo){
+                output += '<tr><td>' + todo.status + '</td><td>' + todo.time + '</td></tr>';
+            });
+            // write HTML output (ending)
+            output += '</table></body></html>'
+            // send output back
+            res.send(output);
+            // log data to the console as well
             console.log(result);
             db.close();
         });
@@ -206,13 +356,27 @@ app.get("/mqtt_pump_water_loop_status", function(req, res, next) {
         if (err) throw err;
         var dbo = db.db("IOT");        
         dbo.collection("mqtt_pump_water_loop_status").find({}).toArray(function(err, result) {
-            if (err) throw err;
-            res.status(200).send(result);
+            var output = '<html><header><title>mqtt_pump_water_loop_status</title></header><body>';
+            output += '<h1>mqtt_pump_water_loop_status</h1>';
+            output += '<table border="1"><tr><td><b>' + 'Status' + '</b></td><td><b>' + 'Time' + '</b></td></tr>';
+            // process todo list
+            result.forEach(function(todo){
+                output += '<tr><td>' + todo.status + '</td><td>' + todo.time + '</td></tr>';
+            });
+            // write HTML output (ending)
+            output += '</table></body></html>'
+            // send output back
+            res.send(output);
+            // log data to the console as well
             console.log(result);
             db.close();
         });
     });
 });
+
+app.use("/", (req, res) => {
+    res.sendFile("B:\\IOT2\\APP\\index.html");
+  });
 
 var port = process.env.PORT || 30000;
 
