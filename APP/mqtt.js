@@ -26,11 +26,24 @@ var client = mqtt.connect({
 client.on('connect', function () {
     // Subscribe any topic
     console.log("MQTT Connect");
-    client.subscribe(['pi_led_status','pi_pump_water_loop_status','pi_pump_water_tank_status',
-    'pi_mix_water_status','pi_valve_A_status','pi_valve_B_status','pi_valve_Acid_status',
-    'pi_ec_sensor_status','pi_ph_sensor_status','mqtt_pump_water_loop_status','mqtt_pump_water_tank_status',
-    'mqtt_mix_water_status','mqtt_valve_A_status','mqtt_valve_B_status','mqtt_valve_Acid_status',
-    'mqtt_switch_status'], function (err) {
+    client.subscribe([
+        'pi_led_status',//1
+        'pi_pump_water_loop_status',
+        'pi_pump_water_tank_status',        
+        'pi_mix_water_status',
+        'pi_valve_A_status',
+        'pi_valve_B_status',
+        'pi_valve_Acid_status',
+        'pi_ec_sensor_status',
+        'pi_ph_sensor_status',
+        'mqtt_pump_water_loop_status',//10
+        'mqtt_pump_water_tank_status',
+        'mqtt_mix_water_status',
+        'mqtt_valve_A_status',
+        'mqtt_valve_B_status',
+        'mqtt_valve_Acid_status',
+        'mqtt_switch_status'
+    ], function (err) {
         if (err) {
             console.log(err);
         }
@@ -51,7 +64,10 @@ client.on('message', function (topic, message) {
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
         var dbo = db.db("IOT");
-        var myobj = {status: message.toString(), time: hours + ":" + minutes + ":" + seconds + " " +year + "-" + month + "-" + date};
+        var myobj = {   
+                        status: message.toString(), 
+                        time: hours + ":" + minutes + ":" + seconds + " " +year + "-" + month + "-" + date
+                    };
         dbo.collection(topic).insertOne(myobj, function(err, res) {
         if (err) throw err;
         console.log("1 document inserted");
