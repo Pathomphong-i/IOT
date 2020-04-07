@@ -8,7 +8,11 @@ const MQTT_USER = "uwzbsztw";
 const MQTT_PASSWORD = "Vv2syCm0pNyU";
 
 var url = "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
+//mongodb://root:IOTraspberry@localhost:27017/?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=false
+//mongodb+srv://root:IOTraspberry@cluster0-x9jen.mongodb.net/test?authSource=admin&replicaSet=Cluster0-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true
+//
 var MongoClient = require('mongodb').MongoClient;
+
 
 
 // Connect MQTT
@@ -49,11 +53,11 @@ client.on('message', function (topic, message) {
         var dbo = db.db("IOT");
         var myobj = {status: message.toString(), time: hours + ":" + minutes + ":" + seconds + " " +year + "-" + month + "-" + date};
         dbo.collection(topic).insertOne(myobj, function(err, res) {
-          if (err) throw err;
-          console.log("1 document inserted");
-          db.close();
+        if (err) throw err;
+        console.log("1 document inserted");
+        db.close();
         });
-      });
+    });
     console.log(topic,message.toString());
 });
 
