@@ -213,9 +213,10 @@ app.get("/mqtt_pump_water_loop_status", function(req, res, next) {
         });
     });
 });
-var port = process.env.PORT || 27018;
+
+var port = process.env.PORT || 30000;
 
 app.listen(port, () => {
-  console.log("[success] task 1 : listening on port " + port);
+console.log("[success] task 1 : listening on port " + port);
 });
 
