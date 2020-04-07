@@ -7,6 +7,10 @@ const MQTT_PORT = "15847";
 const MQTT_USER = "uwzbsztw"; 
 const MQTT_PASSWORD = "Vv2syCm0pNyU";
 
+var url = "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
+var MongoClient = require('mongodb').MongoClient;
+
+
 // Connect MQTT
 var client = mqtt.connect({
     host: MQTT_SERVER,
@@ -32,6 +36,16 @@ client.on('connect', function () {
 // Receive Message and print on terminal
 client.on('message', function (topic, message) {
     // message is Buffer
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        var dbo = db.db("test");
+        var myobj = { Topic: topic, status: message.toString() };
+        dbo.collection("customers").insertOne(myobj, function(err, res) {
+          if (err) throw err;
+          console.log("1 document inserted");
+          db.close();
+        });
+      });
     console.log(topic,message.toString());
 });
 
