@@ -375,8 +375,9 @@ app.get("/mqtt_pump_water_loop_status", function(req, res, next) {
 });
 
 app.use("/", (req, res) => {
-    res.sendFile("B:\\IOT2\\APP\\index.html");
-  });
+    // res.sendFile("B:\\IOT2\\APP\\index.html");
+    res.sendFile(__dirname + '/index.html');
+});
 
 var port = process.env.PORT || 30000;
 

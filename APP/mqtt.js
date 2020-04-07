@@ -77,7 +77,7 @@ client.on('message', function (topic, message) {
     console.log(topic,message.toString());
 });
 
-client.publish("test","GGGGGG");
+//client.publish("test","GGGGGG");
 // setInterval(() => {
 //     client.publish("test", "hello from NodeJS");
 // }, 5000);
