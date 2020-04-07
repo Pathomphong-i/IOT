@@ -213,12 +213,7 @@ app.get("/mqtt_pump_water_loop_status", function(req, res, next) {
         });
     });
 });
-
-app.use("/", (req, res) => {
-    res.sendFile("B:\\IOT2\\APP\\index.html");
-  });
-
-var port = process.env.PORT || 30000;
+var port = process.env.PORT || 27017;
 
 app.listen(port, () => {
   console.log("[success] task 1 : listening on port " + port);
