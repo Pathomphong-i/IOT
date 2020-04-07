@@ -18,7 +18,11 @@ var client = mqtt.connect({
 client.on('connect', function () {
     // Subscribe any topic
     console.log("MQTT Connect");
-    client.subscribe(['test','topic2'], function (err) {
+    client.subscribe(['pi_led_status','pi_pump_water_loop_status','pi_pump_water_tank_status',
+    'pi_mix_water_status','pi_valve_A_status','pi_valve_B_status','pi_valve_Acid_status',
+    'pi_ec_sensor_status','pi_ph_sensor_status','mqtt_pump_water_loop_status','mqtt_pump_water_tank_status',
+    'mqtt_mix_water_status','mqtt_valve_A_status','mqtt_valve_B_status','mqtt_valve_Acid_status',
+    'mqtt_switch_status'], function (err) {
         if (err) {
             console.log(err);
         }
@@ -28,10 +32,14 @@ client.on('connect', function () {
 // Receive Message and print on terminal
 client.on('message', function (topic, message) {
     // message is Buffer
-    console.log(message.toString());
+    console.log(topic,message.toString());
 });
 
 client.publish("test","GGGGGG");
 // setInterval(() => {
 //     client.publish("test", "hello from NodeJS");
 // }, 5000);
+
+// mqtt_pump_water_loop_status','mqtt_pump_water_tank_status',
+// 'mqtt_mix_water_status','mqtt_valve_A_status','mqtt_valve_B_status','mqtt_valve_Acid_status',
+// 'mqtt_switch_status
