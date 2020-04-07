@@ -148,7 +148,7 @@ while True:
 		GPIO.output(pump_water_tank_pin,GPIO.LOW)
 		if pi_pump_water_tank_status == "OFF":
 			pi_pump_water_tank_status = "ON"
-			client.publish("pi_led_spi_pump_water_tank_status", "ON")
+			client.publish("pi_pump_water_tank_status", "ON")
 			print("water_tank_ON")
 	elif mqtt_pump_water_tank_status == "OFF":
 		GPIO.output(pump_water_tank_pin,GPIO.HIGH)
