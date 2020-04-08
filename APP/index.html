@@ -3,6 +3,22 @@
 
 <head>
     <h1 style="text-align: center;">IOT</h1>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        $.ajax({
+        url: '/pi_mix_water_status',
+        type: 'GET'
+        })
+        .done(function(users) {
+            users.forEach(function(todo){
+                console.log(todo.status + " " + todo.time);
+            });
+            //console.log(users);
+        })
+        .fail(function(e) {
+        console.log(e);
+        });
+    </script>
 </head>
 
 <body>
