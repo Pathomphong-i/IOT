@@ -2,10 +2,10 @@
 var mqtt = require('mqtt');
 
 const MQTT_SERVER = "hairdresser.cloudmqtt.com";
-const MQTT_PORT = "15847";
+const MQTT_PORT = "15851";
 //if your server don't have username and password let blank.
-const MQTT_USER = "uwzbsztw"; 
-const MQTT_PASSWORD = "Vv2syCm0pNyU";
+const MQTT_USER = "mgfehiyl"; 
+const MQTT_PASSWORD = "GuAsoAf9iA2G";
 
 var url = "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
 //mongodb://root:IOTraspberry@localhost:27017/?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=false
@@ -69,15 +69,15 @@ client.on('message', function (topic, message) {
                         time: hours + ":" + minutes + ":" + seconds + " " +year + "-" + month + "-" + date
                     };
         dbo.collection(topic).insertOne(myobj, function(err, res) {
-        if (err) throw err;
-        console.log("1 document inserted");
-        db.close();
+            if (err) throw err;
+            console.log("1 document inserted");
+            db.close();
         });
     });
     console.log(topic,message.toString());
 });
 
-client.publish("test","GGGGGG");
+//client.publish("test","GGGGGG");
 // setInterval(() => {
 //     client.publish("test", "hello from NodeJS");
 // }, 5000);
