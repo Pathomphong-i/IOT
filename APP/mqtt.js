@@ -70,7 +70,7 @@ client.on('message', function (topic, message) {
                     };
         dbo.collection(topic).insertOne(myobj, function(err, res) {
             if (err) throw err;
-            console.log("1 document inserted");
+            console.log("inserted");
             db.close();
         });
     });
