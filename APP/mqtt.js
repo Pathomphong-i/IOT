@@ -36,13 +36,6 @@ client.on('connect', function () {
         'pi_valve_Acid_status',
         'pi_ec_sensor_status',
         'pi_ph_sensor_status',
-        'mqtt_pump_water_loop_status',//10
-        'mqtt_pump_water_tank_status',
-        'mqtt_mix_water_status',
-        'mqtt_valve_A_status',
-        'mqtt_valve_B_status',
-        'mqtt_valve_Acid_status',
-        'mqtt_switch_status'
     ], function (err) {
         if (err) {
             console.log(err);
