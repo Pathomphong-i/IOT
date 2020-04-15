@@ -210,15 +210,15 @@ while True:
 			client.publish("pi_valve_Acid_status", "OFF")
 			print("Acid_OFF")
 	#ec
-	ec_adc_chanal = 0
-	ec_adc_values = adc.read_adc(ec_adc_chanal,gain=GAIN)
+	# ec_adc_chanal = 0
+	# ec_adc_values = adc.read_adc(ec_adc_chanal,gain=GAIN)
 		#0v 4640 3.3 5040  3.3/dif
 	# ec_volt = (ec_adc_values - 4640)*(3.3/(5040-4640))
 	# ec_new_volt = math.ceil(ec_volt*100)/100
 	# client.publish("pi_ec_sensor_status", ec_new_volt)
 	# print("ec_volt = %.2f" %(ec_volt))
-	client.publish("pi_ec_sensor_status",ec_adc_values)
-	print("eh_value =",ec_adc_values)
+	# client.publish("pi_ec_sensor_status",ec_adc_values)
+	# print("eh_value =",ec_adc_values)
 
 	#ph
 	ph_adc_chanal = 1
