@@ -218,7 +218,7 @@ while True:
 	# client.publish("pi_ec_sensor_status", ec_new_volt)
 	# print("ec_volt = %.2f" %(ec_volt))
 	client.publish("pi_ec_sensor_status",ec_adc_values)
-	print("ph_volt = %.2f" %(ec_adc_values))
+	print("eh_value =",ec_adc_values)
 
 	#ph
 	ph_adc_chanal = 1
@@ -229,6 +229,6 @@ while True:
 	# client.publish("pi_ph_sensor_status", ph_new_volt)
 	# print("ph_volt = %.2f" %(ph_volt))
 	client.publish("pi_ph_sensor_status",ph_adc_values)
-	print("ph_volt = %.2f" %(ph_adc_values))
+	print("ph_value =", ph_adc_values)
 
 	time.sleep(1)
