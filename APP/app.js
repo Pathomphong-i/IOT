@@ -445,12 +445,12 @@ app.get("/", function(req, res, next) {
             db.close();
         });
         //8
-        // dbo.collection("pi_pump_water_tank_status").find({}).toArray(function(err, result) {
-        //     result.forEach(function(todo){
-        //         pi_pump_water_tank_status = todo.status;
-        //     });
-        //     db.close();
-        // });
+        dbo.collection("pi_pump_water_tank_status").find({}).toArray(function(err, result) {
+            result.forEach(function(todo){
+                pi_pump_water_tank_status = todo.status;
+            });
+            db.close();
+        });
         //9
         dbo.collection("pi_led_status").find({}).toArray(function(err, result) {
             result.forEach(function(todo){
@@ -473,7 +473,7 @@ app.get("/", function(req, res, next) {
             var i = '</td><td style="width: 40.5px;"><a href="http://localhost:30000/pi_pump_water_tank_status" target="_blank" rel="noopener">log</a></td><td style="width: 283px;">&nbsp;<a href="http://localhost:30000/tank/on" target="_blank" rel="noopener">on</a>   <a href="http://localhost:30000/tank/off" target="_blank" rel="noopener">off</a></td></tr><tr><td style="width: 84px;">LED</td><td style="width: 139.5px; text-align: center;">';
             var j = '</td><td style="width: 40.5px;"><a href="http://localhost:30000/pi_led_status" target="_blank" rel="noopener">log</a></td><td style="width: 283px;">&nbsp;<a href="http://localhost:30000/led/on" target="_blank" rel="noopener">on</a>   <a href="http://localhost:30000/led/off" target="_blank" rel="noopener">off</a></td></tr><tr></td></tr></tbody></table><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;&nbsp;</p></body></html>';
             
-            output += a + pi_ec_sensor_status + b + pi_ph_sensor_status + c + pi_valve_A_status + d + pi_valve_B_status + e + pi_valve_Acid_status + f + pi_mix_water_status + g + pi_pump_water_loop_status + h + 'OFF' + i + pi_led_status + j;
+            output += a + pi_ec_sensor_status + b + pi_ph_sensor_status + c + pi_valve_A_status + d + pi_valve_B_status + e + pi_valve_Acid_status + f + pi_mix_water_status + g + pi_pump_water_loop_status + h + pi_pump_water_tank_status + i + pi_led_status + j;
             
             res.send(output)
 
