@@ -107,7 +107,9 @@ client.subscribe([("mqtt_pump_water_loop_status",0),("mqtt_pump_water_tank_statu
 	("mqtt_valve_Acid_status",0),("mqtt_switch_status",0)])
 client.on_message=on_message
 client.loop_start() 
-	
+
+ph_old = 0
+ec_old = 0
 #main
 while True:
 	#LED control
@@ -217,8 +219,10 @@ while True:
 	# ec_new_volt = math.ceil(ec_volt*100)/100
 	# client.publish("pi_ec_sensor_status", ec_new_volt)
 	# print("ec_volt = %.2f" %(ec_volt))
-	client.publish("pi_ec_sensor_status",ec_adc_values)
-	print("eh_value =",ec_adc_values)
+	if ec_adc_values != ec_old:
+		client.publish("pi_ec_sensor_status",ec_adc_values)
+		ec_old = ec_adc_values	
+		print("eh_value =",ec_adc_values)
 
 	#ph
 	ph_adc_chanal = 1
@@ -228,7 +232,9 @@ while True:
 	# ph_new_volt = math.ceil(ph_volt*100)/100
 	# client.publish("pi_ph_sensor_status", ph_new_volt)
 	# print("ph_volt = %.2f" %(ph_volt))
-	client.publish("pi_ph_sensor_status",ph_adc_values)
-	print("ph_value =", ph_adc_values)
+	if ph_adc_values != ph_old:
+		client.publish("pi_ph_sensor_status",ph_adc_values)
+		ph_old = ph_adc_values
+		print("ph_value =", ph_adc_values)
 
 	time.sleep(1)
