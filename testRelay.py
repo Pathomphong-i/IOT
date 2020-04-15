@@ -38,20 +38,11 @@ GPIO.setup(valve_Acid_pin,GPIO.OUT)
 GPIO.setup(led_pin,GPIO.OUT)
 
 #preset relay active low "OFF"
-a = input()
-if a == "ON":
 
-    GPIO.output(pump_water_loop_pin,GPIO.LOW)
-    GPIO.output(pump_water_tank_pin,GPIO.LOW)
-    GPIO.output(mix_water_pin,GPIO.LOW)
-    GPIO.output(valve_A_pin,GPIO.LOW)
-    GPIO.output(valve_B_pin,GPIO.LOW)
-    GPIO.output(valve_Acid_pin,GPIO.LOW)
-elif a == "OFF":
 
-    GPIO.output(pump_water_loop_pin,GPIO.HIGH)
-    GPIO.output(pump_water_tank_pin,GPIO.HIGH)
-    GPIO.output(mix_water_pin,GPIO.HIGH)
-    GPIO.output(valve_A_pin,GPIO.HIGH)
-    GPIO.output(valve_B_pin,GPIO.HIGH)
-    GPIO.output(valve_Acid_pin,GPIO.HIGH)
+GPIO.output(pump_water_loop_pin,GPIO.LOW)
+GPIO.output(pump_water_tank_pin,GPIO.LOW)
+GPIO.output(mix_water_pin,GPIO.LOW)
+GPIO.output(valve_A_pin,GPIO.LOW)
+GPIO.output(valve_B_pin,GPIO.LOW)
+GPIO.output(valve_Acid_pin,GPIO.LOW)
