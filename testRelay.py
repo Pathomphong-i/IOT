@@ -49,7 +49,7 @@ if a == "ON":
     GPIO.output(valve_Acid_pin,GPIO.LOW)
 elif a == "OFF":
 
-     GPIO.output(pump_water_loop_pin,GPIO.HIGH)
+    GPIO.output(pump_water_loop_pin,GPIO.HIGH)
     GPIO.output(pump_water_tank_pin,GPIO.HIGH)
     GPIO.output(mix_water_pin,GPIO.HIGH)
     GPIO.output(valve_A_pin,GPIO.HIGH)
