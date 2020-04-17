@@ -50,7 +50,7 @@ pi_switch_status = "OFF"
 pi_ec_sensor_status = 0
 pi_ph_sensor_status = 0
 #set text output
-pi_pump_water_loop_status = "OFF"
+pi_pump_water_loop_status = "ON"
 pi_pump_water_tank_status = "OFF"
 pi_mix_water_status = "OFF"
 pi_valve_A_status = "OFF"
@@ -59,7 +59,7 @@ pi_valve_Acid_status = "OFF"
 pi_led_status = "OFF"
 
 #set text mqtt sub for control
-mqtt_pump_water_loop_status = "OFF"
+mqtt_pump_water_loop_status = "ON"
 mqtt_pump_water_tank_status = "OFF"
 mqtt_mix_water_status = "OFF"
 mqtt_valve_A_status = "OFF"
