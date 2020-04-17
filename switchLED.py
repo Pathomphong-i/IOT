@@ -121,13 +121,13 @@ while True:
 		pi_switch_status =  "OFF" 
 
 	if pi_switch_status == "ON" or mqtt_switch_status == "ON":
-		GPIO.output(led_pin,GPIO.LOW) 
+		GPIO.output(led_pin,GPIO.HIGH) 
 		if pi_led_status == "OFF":
 			pi_led_status = "ON"
 			client.publish("pi_led_status", "ON")
 			print("Led_ON")
 	elif pi_switch_status == "OFF" or mqtt_switch_status == "OFF":
-		GPIO.output(led_pin,GPIO.HIGH)
+		GPIO.output(led_pin,GPIO.LOW)
 		if pi_led_status =="ON":
 			pi_led_status = "OFF"
 			client.publish("pi_led_status", "OFF")
@@ -135,13 +135,13 @@ while True:
 	
 	#pump water loop
 	if mqtt_pump_water_loop_status == "ON":
-		GPIO.output(pump_water_loop_pin,GPIO.LOW)
+		GPIO.output(pump_water_loop_pin,GPIO.HIGH)
 		if pi_pump_water_loop_status == "OFF":
 			pi_pump_water_loop_status = "ON"
 			client.publish("pi_pump_water_loop_status", "ON")
 			print("water_loop_ON")
 	elif mqtt_pump_water_loop_status == "OFF":
-		GPIO.output(pump_water_loop_pin,GPIO.HIGH)
+		GPIO.output(pump_water_loop_pin,GPIO.LOW)
 		if pi_pump_water_loop_status == "ON":
 			pi_pump_water_loop_status = "OFF"
 			client.publish("pi_pump_water_loop_status", "OFF")
