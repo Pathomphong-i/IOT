@@ -265,62 +265,63 @@ app.use("/", (req, res) => {
         var pi_led_status="";
         var output="";
         //1       
-        dbo.collection("pi_ec_sensor_status").find({}).toArray(function(err, result) {
+        dbo.collection("pi_ec_sensor_status").find({}).sort({_id:-1}).limit(1).toArray(function(err, result) {
             result.forEach(function(todo){
                 pi_ec_sensor_status = todo.status;
             });
         });
         //2
-        dbo.collection("pi_ph_sensor_status").find({}).toArray(function(err, result) {
+        
+        dbo.collection("pi_ph_sensor_status").find({}).sort({_id:-1}).limit(1).toArray(function(err, result) {
             result.forEach(function(todo){
                 pi_ph_sensor_status = todo.status;
             });
             
         });
         //3
-        dbo.collection("pi_valve_A_status").find({}).toArray(function(err, result) {
+        dbo.collection("pi_valve_A_status").find({}).sort({_id:-1}).limit(1).toArray(function(err, result) {
             result.forEach(function(todo){
                 pi_valve_A_status = todo.status;
             });
             
         });
         //4
-        dbo.collection("pi_valve_B_status").find({}).toArray(function(err, result) {
+        dbo.collection("pi_valve_B_status").find({}).sort({_id:-1}).limit(1).toArray(function(err, result) {
             result.forEach(function(todo){
                 pi_valve_B_status = todo.status;
             });
             
         });
         //5
-        dbo.collection("pi_valve_Acid_status").find({}).toArray(function(err, result) {
+        dbo.collection("pi_valve_Acid_status").find({}).sort({_id:-1}).limit(1).toArray(function(err, result) {
             result.forEach(function(todo){
                 pi_valve_Acid_status = todo.status;
             });
             
         });
         //6
-        dbo.collection("pi_mix_water_status").find({}).toArray(function(err, result) {
+        dbo.collection("pi_mix_water_status").find({}).sort({_id:-1}).limit(1).toArray(function(err, result) {
             result.forEach(function(todo){
                 pi_mix_water_status = todo.status;
             });
             
         });
         //7
-        dbo.collection("pi_pump_water_loop_status").find({}).toArray(function(err, result) {
+        dbo.collection("pi_pump_water_loop_status").find({}).sort({_id:-1}).limit(1).toArray(function(err, result) {
             result.forEach(function(todo){
                 pi_pump_water_loop_status = todo.status;
             });
             
         });
         //8
-        dbo.collection("pi_pump_water_tank_status").find({}).toArray(function(err, result) {
+        dbo.collection("pi_pump_water_tank_status").find({}).sort({_id:-1}).limit(1).toArray(function(err, result) {
             result.forEach(function(todo){
                 pi_pump_water_tank_status = todo.status;
             });
             
         });
         //9
-        dbo.collection("pi_led_status").find({}).toArray(function(err, result) {
+        dbo.collection("pi_led_status").find({}).find({}).sort({_id:-1}).limit(1).toArray(function(err, result) {
             result.forEach(function(todo){
                 pi_led_status = todo.status;
             });
