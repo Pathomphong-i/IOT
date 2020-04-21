@@ -76,12 +76,3 @@ client.on('message', function (topic, message) {
     });
     console.log(topic,message.toString());
 });
-
-//client.publish("test","GGGGGG");
-// setInterval(() => {
-//     client.publish("test", "hello from NodeJS");
-// }, 5000);
-
-// mqtt_pump_water_loop_status','mqtt_pump_water_tank_status',
-// 'mqtt_mix_water_status','mqtt_valve_A_status','mqtt_valve_B_status','mqtt_valve_Acid_status',
-// 'mqtt_switch_status
