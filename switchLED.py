@@ -50,7 +50,7 @@ pi_switch_status = "OFF"
 pi_ec_sensor_status = 0
 pi_ph_sensor_status = 0
 #set text output
-pi_pump_water_loop_status = "OFF"
+pi_pump_water_loop_status = "ON"
 pi_pump_water_tank_status = "OFF"
 pi_mix_water_status = "OFF"
 pi_valve_A_status = "OFF"
@@ -59,7 +59,7 @@ pi_valve_Acid_status = "OFF"
 pi_led_status = "OFF"
 
 #set text mqtt sub for control
-mqtt_pump_water_loop_status = "OFF"
+mqtt_pump_water_loop_status = "ON"
 mqtt_pump_water_tank_status = "OFF"
 mqtt_mix_water_status = "OFF"
 mqtt_valve_A_status = "OFF"
@@ -107,11 +107,14 @@ client.subscribe([("mqtt_pump_water_loop_status",0),("mqtt_pump_water_tank_statu
 	("mqtt_valve_Acid_status",0),("mqtt_switch_status",0)])
 client.on_message=on_message
 client.loop_start() 
-	
+
+ph_old = 0
+ec_old = 0
 #main
 while True:
 	#LED control
 	switch_value = GPIO.input(switch_pin) #read switch
+	print("sw",switch_value)
 	if switch_value == False:
 		pi_switch_status = "ON"
 	elif switch_value == True:
@@ -132,13 +135,13 @@ while True:
 	
 	#pump water loop
 	if mqtt_pump_water_loop_status == "ON":
-		GPIO.output(pump_water_loop_pin,GPIO.LOW)
+		GPIO.output(pump_water_loop_pin,GPIO.HIGH)
 		if pi_pump_water_loop_status == "OFF":
 			pi_pump_water_loop_status = "ON"
 			client.publish("pi_pump_water_loop_status", "ON")
 			print("water_loop_ON")
 	elif mqtt_pump_water_loop_status == "OFF":
-		GPIO.output(pump_water_loop_pin,GPIO.HIGH)
+		GPIO.output(pump_water_loop_pin,GPIO.LOW)
 		if pi_pump_water_loop_status == "ON":
 			pi_pump_water_loop_status = "OFF"
 			client.publish("pi_pump_water_loop_status", "OFF")
@@ -212,18 +215,26 @@ while True:
 	ec_adc_chanal = 0
 	ec_adc_values = adc.read_adc(ec_adc_chanal,gain=GAIN)
 		#0v 4640 3.3 5040  3.3/dif
-	ec_volt = (ec_adc_values - 4640)*(3.3/(5040-4640))
-	ec_new_volt = math.ceil(ec_volt*100)/100
-	client.publish("pi_ec_sensor_status", ec_new_volt)
-	print("ec_volt = %.2f" %(ec_volt))
+	# ec_volt = (ec_adc_values - 4640)*(3.3/(5040-4640))
+	# ec_new_volt = math.ceil(ec_volt*100)/100
+	# client.publish("pi_ec_sensor_status", ec_new_volt)
+	# print("ec_volt = %.2f" %(ec_volt))
+	if ec_adc_values != ec_old:
+		client.publish("pi_ec_sensor_status",ec_adc_values)
+		ec_old = ec_adc_values	
+		print("eh_value =",ec_adc_values)
 
 	#ph
 	ph_adc_chanal = 1
 	ph_adc_values = adc.read_adc(ph_adc_chanal,gain=GAIN)
 		#0v 4640 3.3 5040  3.3/dif
-	ph_volt = (ph_adc_values - 4640)*(3.3/(5040-4640))
-	ph_new_volt = math.ceil(ph_volt*100)/100
-	client.publish("pi_ph_sensor_status", ph_new_volt)
-	print("ph_volt = %.2f" %(ph_volt))
+	# ph_volt = (ph_adc_values - 4640)*(3.3/(5040-4640))
+	# ph_new_volt = math.ceil(ph_volt*100)/100
+	# client.publish("pi_ph_sensor_status", ph_new_volt)
+	# print("ph_volt = %.2f" %(ph_volt))
+	if ph_adc_values != ph_old:
+		client.publish("pi_ph_sensor_status",ph_adc_values)
+		ph_old = ph_adc_values
+		print("ph_value =", ph_adc_values)
 
 	time.sleep(1)

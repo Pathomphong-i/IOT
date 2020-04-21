@@ -32,35 +32,13 @@ var nameSchema = new mongoose.Schema({
     topic: String
   }
 );
+
 var User = mongoose.model("User", nameSchema);
 
-app.post("/addname", (req, res) => {
-    let date_ob = new Date();
-    let date = ("0" + date_ob.getDate()).slice(-2);
-    let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
-    let year = date_ob.getFullYear();
-    let hours = date_ob.getHours();
-    let minutes = date_ob.getMinutes();
-    let seconds = date_ob.getSeconds();
+app.post("/", (req, res) => {
     var myData = new User(req.body);
-    myData.time = hours + ":" + minutes + ":" + seconds + " " +year + "-" + month + "-" + date;
-
-    res.send(myData);   
-
-    var dbo = db.db("IOT");
-    var myobj = {   
-                    status: message.toString(), 
-                    time: hours + ":" + minutes + ":" + seconds + " " +year + "-" + month + "-" + date
-                };
-    //เก็บ topic จากป่มที่กด
-    dbo.collection(topic).insertOne(myobj, function(err, res) {
-        if (err) throw err;
-        console.log("1 document inserted");
-        db.close();
-    });
-    //เก็บ topic จากป่มที่กด
-    client.publish("test", myData.status);
-
+    client.publish(myData.topic, myData.status);
+    //res.send(myData.topic + ":" + myData.status);   
   });
 
 //1
@@ -270,173 +248,6 @@ app.get("/pi_ph_sensor_status", function(req, res, next) {
         });
     });
 });
-//10
-app.get("/mqtt_pump_water_loop_status", function(req, res, next) {
-    MongoClient.connect(url, function(err, db) {
-        if (err) throw err;
-        var dbo = db.db("IOT");        
-        dbo.collection("mqtt_pump_water_loop_status").find({}).toArray(function(err, result) {
-            var output = '<html><header><title>mqtt_pump_water_loop_status</title></header><body>';
-            output += '<h1>mqtt_pump_water_loop_status</h1>';
-            output += '<table border="1"><tr><td><b>' + 'Status' + '</b></td><td><b>' + 'Time' + '</b></td></tr>';
-            // process todo list
-            result.forEach(function(todo){
-                output += '<tr><td>' + todo.status + '</td><td>' + todo.time + '</td></tr>';
-            });
-            // write HTML output (ending)
-            output += '</table></body></html>'
-            // send output back
-            res.send(output);
-            // log data to the console as well
-            console.log(result);
-            db.close();
-        });
-    });
-});
-//11
-app.get("/mqtt_pump_water_tank_status", function(req, res, next) {
-    MongoClient.connect(url, function(err, db) {
-        if (err) throw err;
-        var dbo = db.db("IOT");        
-        dbo.collection("mqtt_pump_water_tank_status").find({}).toArray(function(err, result) {
-            var output = '<html><header><title>mqtt_pump_water_tank_status</title></header><body>';
-            output += '<h1>mqtt_pump_water_tank_status</h1>';
-            output += '<table border="1"><tr><td><b>' + 'Status' + '</b></td><td><b>' + 'Time' + '</b></td></tr>';
-            // process todo list
-            result.forEach(function(todo){
-                output += '<tr><td>' + todo.status + '</td><td>' + todo.time + '</td></tr>';
-            });
-            // write HTML output (ending)
-            output += '</table></body></html>'
-            // send output back
-            res.send(output);
-            // log data to the console as well
-            console.log(result);
-            db.close();
-        });
-    });
-});
-//12
-app.get("/mqtt_mix_water_status", function(req, res, next) {
-    MongoClient.connect(url, function(err, db) {
-        if (err) throw err;
-        var dbo = db.db("IOT");        
-        dbo.collection("mqtt_mix_water_status").find({}).toArray(function(err, result) {
-            var output = '<html><header><title>mqtt_mix_water_status</title></header><body>';
-            output += '<h1>mqtt_mix_water_status</h1>';
-            output += '<table border="1"><tr><td><b>' + 'Status' + '</b></td><td><b>' + 'Time' + '</b></td></tr>';
-            // process todo list
-            result.forEach(function(todo){
-                output += '<tr><td>' + todo.status + '</td><td>' + todo.time + '</td></tr>';
-            });
-            // write HTML output (ending)
-            output += '</table></body></html>'
-            // send output back
-            res.send(output);
-            // log data to the console as well
-            console.log(result);
-            db.close();
-        });
-    });
-});
-//13
-app.get("/mqtt_valve_A_status", function(req, res, next) {
-    MongoClient.connect(url, function(err, db) {
-        if (err) throw err;
-        var dbo = db.db("IOT");        
-        dbo.collection("mqtt_valve_A_status").find({}).toArray(function(err, result) {
-            var output = '<html><header><title>mqtt_valve_A_status</title></header><body>';
-            output += '<h1>mqtt_valve_A_status</h1>';
-            output += '<table border="1"><tr><td><b>' + 'Status' + '</b></td><td><b>' + 'Time' + '</b></td></tr>';
-            // process todo list
-            result.forEach(function(todo){
-                output += '<tr><td>' + todo.status + '</td><td>' + todo.time + '</td></tr>';
-            });
-            // write HTML output (ending)
-            output += '</table></body></html>'
-            // send output back
-            res.send(output);
-            // log data to the console as well
-            console.log(result);
-            db.close();
-        });
-    });
-});
-//14
-app.get("/mqtt_valve_B_status", function(req, res, next) {
-    MongoClient.connect(url, function(err, db) {
-        if (err) throw err;
-        var dbo = db.db("IOT");        
-        dbo.collection("mqtt_valve_B_status").find({}).toArray(function(err, result) {
-            var output = '<html><header><title>mqtt_valve_B_status</title></header><body>';
-            output += '<h1>mqtt_valve_B_status</h1>';
-            output += '<table border="1"><tr><td><b>' + 'Status' + '</b></td><td><b>' + 'Time' + '</b></td></tr>';
-            // process todo list
-            result.forEach(function(todo){
-                output += '<tr><td>' + todo.status + '</td><td>' + todo.time + '</td></tr>';
-            });
-            // write HTML output (ending)
-            output += '</table></body></html>'
-            // send output back
-            res.send(output);
-            // log data to the console as well
-            console.log(result);
-            db.close();
-        });
-    });
-});
-//15
-app.get("/mqtt_switch_status", function(req, res, next) {
-    MongoClient.connect(url, function(err, db) {
-        if (err) throw err;
-        var dbo = db.db("IOT");        
-        dbo.collection("mqtt_switch_status").find({}).toArray(function(err, result) {
-            var output = '<html><header><title>mqtt_switch_status</title></header><body>';
-            output += '<h1>mqtt_switch_status</h1>';
-            output += '<table border="1"><tr><td><b>' + 'Status' + '</b></td><td><b>' + 'Time' + '</b></td></tr>';
-            // process todo list
-            result.forEach(function(todo){
-                output += '<tr><td>' + todo.status + '</td><td>' + todo.time + '</td></tr>';
-            });
-            // write HTML output (ending)
-            output += '</table></body></html>'
-            // send output back
-            res.send(output);
-            // log data to the console as well
-            console.log(result);
-            db.close();
-        });
-    });
-});
-//16
-app.get("/mqtt_pump_water_loop_status", function(req, res, next) {
-    MongoClient.connect(url, function(err, db) {
-        if (err) throw err;
-        var dbo = db.db("IOT");        
-        dbo.collection("mqtt_pump_water_loop_status").find({}).toArray(function(err, result) {
-            var output = '<html><header><title>mqtt_pump_water_loop_status</title></header><body>';
-            output += '<h1>mqtt_pump_water_loop_status</h1>';
-            output += '<table border="1"><tr><td><b>' + 'Status' + '</b></td><td><b>' + 'Time' + '</b></td></tr>';
-            // process todo list
-            result.forEach(function(todo){
-                output += '<tr><td>' + todo.status + '</td><td>' + todo.time + '</td></tr>';
-            });
-            // write HTML output (ending)
-            output += '</table></body></html>'
-            // send output back
-            res.send(output);
-            // log data to the console as well
-            console.log(result);
-            db.close();
-        });
-    });
-});
-
-
-// app.use("/", (req, res) => {
-//     // res.sendFile("B:\\IOT2\\APP\\index.html");
-//     res.sendFile(__dirname + '/index.html');
-// });
 
 app.use("/", (req, res) => {
     MongoClient.connect(url, function(err, db) {
@@ -519,18 +330,19 @@ app.use("/", (req, res) => {
             var a = '<!DOCTYPE html><html><head><h1 style="text-align: center;">IOT</h1></head><body><table style="height: 298px; width: 483px; border-color: #ff5733; margin-left: auto; margin-right: auto;" border="5"><tbody><tr><td style="width: 84px;"><strong>Pi status</strong></td><td style="width: 139.5px; text-align: center;"><strong>value</strong></td><td style="width: 40.5px;"><strong>log</strong></td><td style="width: 283px; text-align: left;"><strong>control by publish to clound mqtt</strong></td></tr><tr><td style="width: 84px;">Ec</td><td style="width: 139.5px; text-align: center;">';
             var b = '</td><td style="width: 40.5px;"><a href="http://localhost:30000/pi_ec_sensor_status" target="_blank" rel="noopener">log</a></td><td style="width: 283px;">&nbsp;</td></tr><tr><td style="width: 84px;">Ph</td><td style="width: 139.5px; text-align: center;">';
             var c = '</td><td style="width: 40.5px;"><a href="http://localhost:30000/pi_ph_sensor_status" target="_blank" rel="noopener">log</a></td><td style="width: 283px;">&nbsp;</td></tr><tr><td style="width: 84px;">Valve A</td><td style="width: 139.5px; text-align: center;">';
-            var d = '</td><td style="width: 40.5px;"><a href="http://localhost:30000/pi_valve_A_status" target="_blank" rel="noopener">log</a></td><td style="width: 283px;"><input id="A" name="A" type="checkbox" value="ON" />&nbsp;<label for="A">valve A</label>&nbsp;<input type="submit" value="publish" /></td></tr><tr></tr><td style="width: 84px;">Valve B</td><td style="width: 139.5px; text-align: center;">';
-            var e = '</td><td style="width: 40.5px;"><a href="http://localhost:30000/pi_valve_B_status" target="_blank" rel="noopener">log</a></td><td style="width: 283px;"><input id="B" name="B" type="checkbox" value="ON" />&nbsp;<label for="B">valve B</label>&nbsp;<input type="submit" value="publish" /></td></tr><tr><td style="width: 84px;">valve Acid</td><td style="width: 139.5px; text-align: center;">';
-            var f = '</td><td style="width: 40.5px;"><a href="http://localhost:30000/pi_valve_Acid_status" target="_blank" rel="noopener">log</a></td><td style="width: 283px;"><input id="Acid" name="Acid" type="checkbox" value="ON" />&nbsp;<label for="Acid">valve Acid</label>&nbsp;<input type="submit" value="publish" /></td></tr><tr><td style="width: 84px;">mix water</td><td style="width: 139.5px; text-align: center;">';
-            var g = '</td><td style="width: 40.5px;"><a href="http://localhost:30000/pi_mix_water_status" target="_blank" rel="noopener">log</a></td><td style="width: 283px;"><input id="mix water" name="mix water" type="checkbox" value="ON" />&nbsp;<label for="mix water">mix water</label>&nbsp;<input type="submit" value="publish" /></td></tr><tr><td style="width: 84px;">pump loop</td><td style="width: 139.5px; text-align: center;">';
-            var h = '</td><td style="width: 40.5px;"><a href="http://localhost:30000/pi_pump_water_loop_status" target="_blank" rel="noopener">log</a></td><td style="width: 283px;"><input id="pump loop" name="pump loop" type="checkbox" value="ON" />&nbsp;<label for="pump loop">pump loop</label>&nbsp;<input type="submit" value="publish" /></td></tr><tr><td style="width: 84px;">pump tank</td><td style="width: 139.5px; text-align: center;">';
-            var i = '</td><td style="width: 40.5px;"><a href="http://localhost:30000/pi_pump_water_tank_status" target="_blank" rel="noopener">log</a></td><td style="width: 283px;"><input id="pump tank" name="pump tank" type="checkbox" value="ON" />&nbsp;<label for="pump tank">pump tank</label>&nbsp;<input type="submit" value="publish" /></td></tr><tr><td style="width: 84px;">LED</td><td style="width: 139.5px; text-align: center;">';
-            var j = '</td><td style="width: 40.5px;"><a href="http://localhost:30000/pi_led_status" target="_blank" rel="noopener">log</a></td><td style="width: 283px;"><input id="switch" name="switch" type="checkbox" value="ON" />&nbsp;<label for="switch">switch</label>&nbsp;<input type="submit" value="publish" /></td></tr></tbody></table><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;&nbsp;</p></body></html>';
+            var d = '</td><td style="width: 40.5px;"><a href="http://localhost:30000/pi_valve_A_status" target="_blank" rel="noopener">log</a></td><td style="width: 283px;"><form method="post" action="/"><input type="hidden" name="topic" value="mqtt_valve_A_status" /><input name="status" type="submit" value="ON"><input name="status" type="submit" value="OFF"></form></form></td></tr><tr></tr><td style="width: 84px;">Valve B</td><td style="width: 139.5px; text-align: center;">';
+            var e = '</td><td style="width: 40.5px;"><a href="http://localhost:30000/pi_valve_B_status" target="_blank" rel="noopener">log</a></td><td style="width: 283px;"><form method="post" action="/"><form method="post" action="/post"><input type="hidden" name="topic" value="mqtt_valve_B_status" /><input name="status" type="submit" value="ON"><input name="status" type="submit" value="OFF"></form></td></tr><tr><td style="width: 84px;">valve Acid</td><td style="width: 139.5px; text-align: center;">';
+            var f = '</td><td style="width: 40.5px;"><a href="http://localhost:30000/pi_valve_Acid_status" target="_blank" rel="noopener">log</a></td><td style="width: 283px;"><form method="post" action="/"><input type="hidden" name="topic" value="mqtt_valve_Acid_status" /><input name="status" type="submit" value="ON"><input name="status" type="submit" value="OFF"></form></td></tr><tr><td style="width: 84px;">mix water</td><td style="width: 139.5px; text-align: center;">';
+            var g = '</td><td style="width: 40.5px;"><a href="http://localhost:30000/pi_mix_water_status" target="_blank" rel="noopener">log</a></td><td style="width: 283px;"><form method="post" action="/"><input type="hidden" name="topic" value="mqtt_mix_water_status" /><input name="status" type="submit" value="ON"><input name="status" type="submit" value="OFF"></form></td></tr><tr><td style="width: 84px;">pump loop</td><td style="width: 139.5px; text-align: center;">';
+            var h = '</td><td style="width: 40.5px;"><a href="http://localhost:30000/pi_pump_water_loop_status" target="_blank" rel="noopener">log</a></td><td style="width: 283px;"><form method="post" action="/"><input type="hidden" name="topic" value="mqtt_pump_water_loop_status" /><input name="status" type="submit" value="ON"><input name="status" type="submit" value="OFF"></form></td></tr><tr><td style="width: 84px;">pump tank</td><td style="width: 139.5px; text-align: center;">';
+            var i = '</td><td style="width: 40.5px;"><a href="http://localhost:30000/pi_pump_water_tank_status" target="_blank" rel="noopener">log</a></td><td style="width: 283px;"><form method="post" action="/"><input type="hidden" name="topic" value="mqtt_pump_water_tank_status" /><input name="status" type="submit" value="ON"><input name="status" type="submit" value="OFF"></form></td></tr><tr><td style="width: 84px;">LED</td><td style="width: 139.5px; text-align: center;">';
+            var j = '</td><td style="width: 40.5px;"><a href="http://localhost:30000/pi_led_status" target="_blank" rel="noopener">log</a></td><td style="width: 283px;"><form method="post" action="/"><input type="hidden" name="topic" value="mqtt_switch_status" /><input name="status" type="submit" value="ON"><input name="status" type="submit" value="OFF"></form></form></td></tr></tbody></table><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;&nbsp;</p></body></html>';
             
+            //var z = '<form method="post" action="/post"><input type="hidden" name="topic" value="pi_mix_water_status" /><input name="status" type="submit" value="ON"><input name="status" type="submit" value="OFF"></form>'
             output += a + pi_ec_sensor_status + b + pi_ph_sensor_status + c + pi_valve_A_status + d + pi_valve_B_status + e + pi_valve_Acid_status + f + pi_mix_water_status + g + pi_pump_water_loop_status + h + pi_pump_water_tank_status + i + pi_led_status + j;
-            //res.send(output)
+            res.send(output)
 
-            res.sendFile(__dirname + '/index.html');
+            //res.sendFile(__dirname + '/index.html');
         });
         db.close();
         
