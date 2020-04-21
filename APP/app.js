@@ -321,7 +321,7 @@ app.use("/", (req, res) => {
             
         });
         //9
-        dbo.collection("pi_led_status").find({}).find({}).sort({_id:-1}).limit(1).toArray(function(err, result) {
+        dbo.collection("pi_led_status").find({}).sort({_id:-1}).limit(1).toArray(function(err, result) {
             result.forEach(function(todo){
                 pi_led_status = todo.status;
             });
