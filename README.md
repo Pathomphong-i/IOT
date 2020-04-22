@@ -15,12 +15,12 @@ Use the node package manager [npm](https://www.npmjs.com/) to install [vue/cli](
 sudo npm i -g @vue-cli
 npm install pm2 -g
 ```
-first install & run api server
+first install module & run api server
 ```bash
 npm install
 pm2 start server/index.js
 ```
-and install & run vue
+and install module & run vue
 ```bash
 cd vue-hydro
 npm install
