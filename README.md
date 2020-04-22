@@ -1,5 +1,5 @@
 # Vue-Hydro
-![version](https://img.shields.io/badge/version-beta-yellow.svg)
+[![version](https://img.shields.io/badge/version-beta-yellow.svg)]()
 
 Dashboard for monitor hydroponic system (test) 
 
