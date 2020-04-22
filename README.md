@@ -9,7 +9,7 @@ vue.js + vue-mqtt + api + cloud mongodb
 
 ## Installation
 
-Use the package manager [npm](https://www.npmjs.com/) to install [pm2](https://pm2.keymetrics.io/).
+Use the node package manager [npm](https://www.npmjs.com/) to install [pm2](https://pm2.keymetrics.io/).
 
 ```bash
 npm install pm2 -g
