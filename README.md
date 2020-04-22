@@ -5,13 +5,14 @@ Dashboard for monitor hydroponic system (test)
 
 ## Description
 
-vue.js + vue-mqtt + api + cloud mongodb
+vue.js + vue-mqtt + api server + cloud mongodb
 
 ## Installation
 
-Use the node package manager [npm](https://www.npmjs.com/) to install [pm2](https://pm2.keymetrics.io/).
+Use the node package manager [npm](https://www.npmjs.com/) to install [vue/cli](https://cli.vuejs.org/guide/) , [pm2](https://pm2.keymetrics.io/)
 
 ```bash
+sudo npm i -g @vue-cli
 npm install pm2 -g
 ```
 first install & run api server
