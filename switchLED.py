@@ -94,9 +94,9 @@ def on_message(client, userdata, message):
 
 #mqtt env
 mqtt_server = "hairdresser.cloudmqtt.com"
-mqtt_port = "15847"
-mqtt_user = "uwzbsztw"
-mqtt_password = "Vv2syCm0pNyU"
+mqtt_port = "xxx"
+mqtt_user = "xxx"
+mqtt_password = "xxx"
 #mqtt connect
 client = mqtt.Client()
 client.username_pw_set(username=mqtt_user,password=mqtt_password)
