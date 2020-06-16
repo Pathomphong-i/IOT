@@ -2,15 +2,13 @@
 var mqtt = require('mqtt');
 
 const MQTT_SERVER = "hairdresser.cloudmqtt.com";
-const MQTT_PORT = "15847";
+const MQTT_PORT = "xxx";
 //if your server don't have username and password let blank.
-const MQTT_USER = "uwzbsztw"; 
-const MQTT_PASSWORD = "Vv2syCm0pNyU";
+const MQTT_USER = "xxx"; 
+const MQTT_PASSWORD = "xxx";
 
 var url = "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
-//mongodb://root:IOTraspberry@localhost:27017/?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=false
-//mongodb+srv://root:IOTraspberry@cluster0-x9jen.mongodb.net/test?authSource=admin&replicaSet=Cluster0-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true
-//
+
 var MongoClient = require('mongodb').MongoClient;
 
 
