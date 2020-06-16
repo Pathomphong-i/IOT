@@ -3,10 +3,10 @@ var express = require("express");
 var mqtt = require('mqtt');
 
 const MQTT_SERVER = "hairdresser.cloudmqtt.com";
-const MQTT_PORT = "15847";
+const MQTT_PORT = "xxx";
 //if your server don't have username and password let blank.
-const MQTT_USER = "uwzbsztw"; 
-const MQTT_PASSWORD = "Vv2syCm0pNyU";
+const MQTT_USER = "xxx"; 
+const MQTT_PASSWORD = "xxx";
 
 var client = mqtt.connect({
     host: MQTT_SERVER,
