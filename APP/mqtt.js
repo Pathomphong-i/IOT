@@ -2,10 +2,10 @@
 var mqtt = require('mqtt');
 
 const MQTT_SERVER = "hairdresser.cloudmqtt.com";
-const MQTT_PORT = "15847";
+const MQTT_PORT = "15851";
 //if your server don't have username and password let blank.
-const MQTT_USER = "uwzbsztw"; 
-const MQTT_PASSWORD = "Vv2syCm0pNyU";
+const MQTT_USER = "mgfehiyl"; 
+const MQTT_PASSWORD = "GuAsoAf9iA2G";
 
 var url = "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
 //mongodb://root:IOTraspberry@localhost:27017/?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=false
@@ -36,13 +36,13 @@ client.on('connect', function () {
         'pi_valve_Acid_status',
         'pi_ec_sensor_status',
         'pi_ph_sensor_status',
-        'mqtt_pump_water_loop_status',//10
+        /*'mqtt_pump_water_loop_status',//10
         'mqtt_pump_water_tank_status',
         'mqtt_mix_water_status',
         'mqtt_valve_A_status',
         'mqtt_valve_B_status',
         'mqtt_valve_Acid_status',
-        'mqtt_switch_status'
+        'mqtt_switch_status'*/
     ], function (err) {
         if (err) {
             console.log(err);
@@ -69,9 +69,9 @@ client.on('message', function (topic, message) {
                         time: hours + ":" + minutes + ":" + seconds + " " +year + "-" + month + "-" + date
                     };
         dbo.collection(topic).insertOne(myobj, function(err, res) {
-        if (err) throw err;
-        console.log("1 document inserted");
-        db.close();
+            if (err) throw err;
+            console.log("1 document inserted");
+            db.close();
         });
     });
     console.log(topic,message.toString());
