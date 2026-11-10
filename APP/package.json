@@ -4,12 +4,11 @@
   "description": "",
   "main": "app.js",
   "dependencies": {
-    "body-parser": "^1.19.0",
-    "express": "^4.17.1",
-    "mongodb": "^3.5.5",
-    "mongoose": "^5.13.22",
-    "mqtt": "^3.0.0",
-    "react-scripts": "^3.0.1"
+    "body-parser": "^1.20.9",
+    "express": "^4.22.3",
+    "mongodb": "^3.7.4",
+    "mongoose": "^6.13.12",
+    "mqtt": "^5.16.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
